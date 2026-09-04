@@ -1,0 +1,6588 @@
+{
+  "n_unlabeled_train_pool": 447573,
+  "n_fit": 447573,
+  "n_eval_labeled_test": 25897,
+  "eval_class_counts": {
+    "none": 21967,
+    "Center": 566,
+    "Donut": 79,
+    "Edge-Loc": 792,
+    "Edge-Ring": 1626,
+    "Loc": 492,
+    "Near-full": 23,
+    "Random": 176,
+    "Scratch": 176
+  },
+  "encoders": {
+    "d4": {
+      "dim": 256,
+      "k": {
+        "32": {
+          "purity": 0.8486311155732325,
+          "purity_defect_only": 0.5045801526717557,
+          "purity_chance": 0.8482449704598989,
+          "purity_defect_only_chance": 0.41424936386768446,
+          "nmi": 0.05928692543486011,
+          "ari": 0.012695596487175267,
+          "nmi_defect_only": 0.147560235966564,
+          "n_clusters_used": 30,
+          "clusters": [
+            {
+              "cluster": 0,
+              "n": 40,
+              "dominant": "none",
+              "dominant_frac": 0.55,
+              "counts": [
+                22,
+                0,
+                0,
+                1,
+                13,
+                2,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 8497
+            },
+            {
+              "cluster": 1,
+              "n": 876,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4600456621004566,
+              "counts": [
+                394,
+                21,
+                8,
+                31,
+                403,
+                12,
+                0,
+                0,
+                7
+              ],
+              "n_unlabeled": 9494
+            },
+            {
+              "cluster": 2,
+              "n": 1308,
+              "dominant": "none",
+              "dominant_frac": 0.8616207951070336,
+              "counts": [
+                1127,
+                5,
+                2,
+                24,
+                27,
+                9,
+                0,
+                108,
+                6
+              ],
+              "n_unlabeled": 12985
+            },
+            {
+              "cluster": 3,
+              "n": 417,
+              "dominant": "none",
+              "dominant_frac": 0.37889688249400477,
+              "counts": [
+                158,
+                129,
+                4,
+                35,
+                60,
+                25,
+                0,
+                2,
+                4
+              ],
+              "n_unlabeled": 14370
+            },
+            {
+              "cluster": 4,
+              "n": 806,
+              "dominant": "none",
+              "dominant_frac": 0.6997518610421837,
+              "counts": [
+                564,
+                43,
+                6,
+                47,
+                122,
+                21,
+                0,
+                1,
+                2
+              ],
+              "n_unlabeled": 11162
+            },
+            {
+              "cluster": 5,
+              "n": 2238,
+              "dominant": "none",
+              "dominant_frac": 0.91733690795353,
+              "counts": [
+                2053,
+                19,
+                4,
+                50,
+                73,
+                31,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 11840
+            },
+            {
+              "cluster": 7,
+              "n": 1214,
+              "dominant": "none",
+              "dominant_frac": 0.9489291598023064,
+              "counts": [
+                1152,
+                13,
+                1,
+                19,
+                6,
+                15,
+                0,
+                1,
+                7
+              ],
+              "n_unlabeled": 12752
+            },
+            {
+              "cluster": 8,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 22227
+            },
+            {
+              "cluster": 9,
+              "n": 26,
+              "dominant": "none",
+              "dominant_frac": 0.9230769230769231,
+              "counts": [
+                24,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 10663
+            },
+            {
+              "cluster": 10,
+              "n": 2541,
+              "dominant": "none",
+              "dominant_frac": 0.8866587957497049,
+              "counts": [
+                2253,
+                49,
+                17,
+                79,
+                75,
+                56,
+                0,
+                0,
+                12
+              ],
+              "n_unlabeled": 14991
+            },
+            {
+              "cluster": 11,
+              "n": 413,
+              "dominant": "none",
+              "dominant_frac": 0.8813559322033898,
+              "counts": [
+                364,
+                4,
+                0,
+                14,
+                17,
+                9,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 18536
+            },
+            {
+              "cluster": 12,
+              "n": 835,
+              "dominant": "none",
+              "dominant_frac": 0.8287425149700599,
+              "counts": [
+                692,
+                17,
+                0,
+                50,
+                67,
+                4,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 22861
+            },
+            {
+              "cluster": 13,
+              "n": 1782,
+              "dominant": "none",
+              "dominant_frac": 0.9343434343434344,
+              "counts": [
+                1665,
+                6,
+                0,
+                26,
+                19,
+                16,
+                0,
+                37,
+                13
+              ],
+              "n_unlabeled": 12833
+            },
+            {
+              "cluster": 14,
+              "n": 1070,
+              "dominant": "none",
+              "dominant_frac": 0.905607476635514,
+              "counts": [
+                969,
+                15,
+                7,
+                31,
+                6,
+                26,
+                6,
+                0,
+                10
+              ],
+              "n_unlabeled": 13109
+            },
+            {
+              "cluster": 15,
+              "n": 2326,
+              "dominant": "none",
+              "dominant_frac": 0.9638865004299226,
+              "counts": [
+                2242,
+                7,
+                0,
+                34,
+                5,
+                31,
+                0,
+                0,
+                7
+              ],
+              "n_unlabeled": 13479
+            },
+            {
+              "cluster": 16,
+              "n": 1130,
+              "dominant": "none",
+              "dominant_frac": 0.9504424778761061,
+              "counts": [
+                1074,
+                3,
+                0,
+                17,
+                20,
+                10,
+                0,
+                1,
+                5
+              ],
+              "n_unlabeled": 13182
+            },
+            {
+              "cluster": 17,
+              "n": 39,
+              "dominant": "none",
+              "dominant_frac": 0.5384615384615384,
+              "counts": [
+                21,
+                1,
+                0,
+                4,
+                7,
+                2,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 11087
+            },
+            {
+              "cluster": 18,
+              "n": 485,
+              "dominant": "none",
+              "dominant_frac": 0.5298969072164949,
+              "counts": [
+                257,
+                8,
+                1,
+                23,
+                186,
+                4,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 12139
+            },
+            {
+              "cluster": 19,
+              "n": 20,
+              "dominant": "none",
+              "dominant_frac": 0.85,
+              "counts": [
+                17,
+                1,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 18141
+            },
+            {
+              "cluster": 20,
+              "n": 751,
+              "dominant": "none",
+              "dominant_frac": 0.800266311584554,
+              "counts": [
+                601,
+                44,
+                7,
+                44,
+                0,
+                44,
+                1,
+                3,
+                7
+              ],
+              "n_unlabeled": 13197
+            },
+            {
+              "cluster": 21,
+              "n": 1453,
+              "dominant": "none",
+              "dominant_frac": 0.8492773571920165,
+              "counts": [
+                1234,
+                74,
+                1,
+                45,
+                66,
+                28,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 11962
+            },
+            {
+              "cluster": 22,
+              "n": 200,
+              "dominant": "none",
+              "dominant_frac": 0.46,
+              "counts": [
+                92,
+                8,
+                3,
+                9,
+                72,
+                8,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 14259
+            },
+            {
+              "cluster": 23,
+              "n": 225,
+              "dominant": "none",
+              "dominant_frac": 0.5377777777777778,
+              "counts": [
+                121,
+                35,
+                10,
+                29,
+                6,
+                19,
+                0,
+                1,
+                4
+              ],
+              "n_unlabeled": 10662
+            },
+            {
+              "cluster": 24,
+              "n": 348,
+              "dominant": "none",
+              "dominant_frac": 0.8275862068965517,
+              "counts": [
+                288,
+                1,
+                0,
+                20,
+                35,
+                1,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 10013
+            },
+            {
+              "cluster": 25,
+              "n": 674,
+              "dominant": "none",
+              "dominant_frac": 0.8471810089020771,
+              "counts": [
+                571,
+                7,
+                0,
+                22,
+                63,
+                8,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 16165
+            },
+            {
+              "cluster": 26,
+              "n": 598,
+              "dominant": "none",
+              "dominant_frac": 0.7073578595317725,
+              "counts": [
+                423,
+                10,
+                0,
+                28,
+                126,
+                7,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 14738
+            },
+            {
+              "cluster": 27,
+              "n": 2102,
+              "dominant": "none",
+              "dominant_frac": 0.8924833491912464,
+              "counts": [
+                1876,
+                23,
+                1,
+                51,
+                80,
+                54,
+                0,
+                0,
+                17
+              ],
+              "n_unlabeled": 12517
+            },
+            {
+              "cluster": 28,
+              "n": 1444,
+              "dominant": "none",
+              "dominant_frac": 0.8801939058171745,
+              "counts": [
+                1271,
+                14,
+                0,
+                50,
+                72,
+                26,
+                0,
+                1,
+                10
+              ],
+              "n_unlabeled": 14665
+            },
+            {
+              "cluster": 29,
+              "n": 218,
+              "dominant": "none",
+              "dominant_frac": 0.7981651376146789,
+              "counts": [
+                174,
+                7,
+                6,
+                2,
+                0,
+                13,
+                8,
+                1,
+                7
+              ],
+              "n_unlabeled": 12297
+            },
+            {
+              "cluster": 30,
+              "n": 317,
+              "dominant": "none",
+              "dominant_frac": 0.8454258675078864,
+              "counts": [
+                268,
+                2,
+                1,
+                7,
+                0,
+                7,
+                8,
+                20,
+                4
+              ],
+              "n_unlabeled": 12780
+            }
+          ],
+          "clusters_defect_only": [
+            {
+              "cluster": 0,
+              "n": 18,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.7222222222222222,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                13,
+                2,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 1,
+              "n": 482,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8360995850622407,
+              "counts": [
+                0,
+                21,
+                8,
+                31,
+                403,
+                12,
+                0,
+                0,
+                7
+              ]
+            },
+            {
+              "cluster": 2,
+              "n": 181,
+              "dominant": "Random",
+              "dominant_frac": 0.5966850828729282,
+              "counts": [
+                0,
+                5,
+                2,
+                24,
+                27,
+                9,
+                0,
+                108,
+                6
+              ]
+            },
+            {
+              "cluster": 3,
+              "n": 259,
+              "dominant": "Center",
+              "dominant_frac": 0.4980694980694981,
+              "counts": [
+                0,
+                129,
+                4,
+                35,
+                60,
+                25,
+                0,
+                2,
+                4
+              ]
+            },
+            {
+              "cluster": 4,
+              "n": 242,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5041322314049587,
+              "counts": [
+                0,
+                43,
+                6,
+                47,
+                122,
+                21,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "cluster": 5,
+              "n": 185,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3945945945945946,
+              "counts": [
+                0,
+                19,
+                4,
+                50,
+                73,
+                31,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 7,
+              "n": 62,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3064516129032258,
+              "counts": [
+                0,
+                13,
+                1,
+                19,
+                6,
+                15,
+                0,
+                1,
+                7
+              ]
+            },
+            {
+              "cluster": 8,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 9,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 10,
+              "n": 288,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.2743055555555556,
+              "counts": [
+                0,
+                49,
+                17,
+                79,
+                75,
+                56,
+                0,
+                0,
+                12
+              ]
+            },
+            {
+              "cluster": 11,
+              "n": 49,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3469387755102041,
+              "counts": [
+                0,
+                4,
+                0,
+                14,
+                17,
+                9,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 12,
+              "n": 143,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.46853146853146854,
+              "counts": [
+                0,
+                17,
+                0,
+                50,
+                67,
+                4,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 13,
+              "n": 117,
+              "dominant": "Random",
+              "dominant_frac": 0.3162393162393162,
+              "counts": [
+                0,
+                6,
+                0,
+                26,
+                19,
+                16,
+                0,
+                37,
+                13
+              ]
+            },
+            {
+              "cluster": 14,
+              "n": 101,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3069306930693069,
+              "counts": [
+                0,
+                15,
+                7,
+                31,
+                6,
+                26,
+                6,
+                0,
+                10
+              ]
+            },
+            {
+              "cluster": 15,
+              "n": 84,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.40476190476190477,
+              "counts": [
+                0,
+                7,
+                0,
+                34,
+                5,
+                31,
+                0,
+                0,
+                7
+              ]
+            },
+            {
+              "cluster": 16,
+              "n": 56,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.35714285714285715,
+              "counts": [
+                0,
+                3,
+                0,
+                17,
+                20,
+                10,
+                0,
+                1,
+                5
+              ]
+            },
+            {
+              "cluster": 17,
+              "n": 18,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3888888888888889,
+              "counts": [
+                0,
+                1,
+                0,
+                4,
+                7,
+                2,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 18,
+              "n": 228,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8157894736842105,
+              "counts": [
+                0,
+                8,
+                1,
+                23,
+                186,
+                4,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 19,
+              "n": 3,
+              "dominant": "Loc",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 20,
+              "n": 150,
+              "dominant": "Center",
+              "dominant_frac": 0.29333333333333333,
+              "counts": [
+                0,
+                44,
+                7,
+                44,
+                0,
+                44,
+                1,
+                3,
+                7
+              ]
+            },
+            {
+              "cluster": 21,
+              "n": 219,
+              "dominant": "Center",
+              "dominant_frac": 0.3378995433789954,
+              "counts": [
+                0,
+                74,
+                1,
+                45,
+                66,
+                28,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 22,
+              "n": 108,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                8,
+                3,
+                9,
+                72,
+                8,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 23,
+              "n": 104,
+              "dominant": "Center",
+              "dominant_frac": 0.33653846153846156,
+              "counts": [
+                0,
+                35,
+                10,
+                29,
+                6,
+                19,
+                0,
+                1,
+                4
+              ]
+            },
+            {
+              "cluster": 24,
+              "n": 60,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5833333333333334,
+              "counts": [
+                0,
+                1,
+                0,
+                20,
+                35,
+                1,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 25,
+              "n": 103,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6116504854368932,
+              "counts": [
+                0,
+                7,
+                0,
+                22,
+                63,
+                8,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 26,
+              "n": 175,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.72,
+              "counts": [
+                0,
+                10,
+                0,
+                28,
+                126,
+                7,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 27,
+              "n": 226,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.35398230088495575,
+              "counts": [
+                0,
+                23,
+                1,
+                51,
+                80,
+                54,
+                0,
+                0,
+                17
+              ]
+            },
+            {
+              "cluster": 28,
+              "n": 173,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4161849710982659,
+              "counts": [
+                0,
+                14,
+                0,
+                50,
+                72,
+                26,
+                0,
+                1,
+                10
+              ]
+            },
+            {
+              "cluster": 29,
+              "n": 44,
+              "dominant": "Loc",
+              "dominant_frac": 0.29545454545454547,
+              "counts": [
+                0,
+                7,
+                6,
+                2,
+                0,
+                13,
+                8,
+                1,
+                7
+              ]
+            },
+            {
+              "cluster": 30,
+              "n": 49,
+              "dominant": "Random",
+              "dominant_frac": 0.40816326530612246,
+              "counts": [
+                0,
+                2,
+                1,
+                7,
+                0,
+                7,
+                8,
+                20,
+                4
+              ]
+            }
+          ],
+          "n_clusters_none_dominated": 28,
+          "unlabeled_in_none_dominated": 375882
+        },
+        "128": {
+          "purity": 0.8592114916785728,
+          "purity_defect_only": 0.5605597964376591,
+          "purity_chance": 0.8482449704598989,
+          "purity_defect_only_chance": 0.4198473282442748,
+          "nmi": 0.06702798364705621,
+          "ari": 0.004799617238164473,
+          "nmi_defect_only": 0.17293410994642958,
+          "n_clusters_used": 112,
+          "clusters": [
+            {
+              "cluster": 0,
+              "n": 44,
+              "dominant": "none",
+              "dominant_frac": 0.6136363636363636,
+              "counts": [
+                27,
+                1,
+                0,
+                9,
+                2,
+                1,
+                0,
+                1,
+                3
+              ],
+              "n_unlabeled": 2689
+            },
+            {
+              "cluster": 1,
+              "n": 516,
+              "dominant": "none",
+              "dominant_frac": 0.9554263565891473,
+              "counts": [
+                493,
+                3,
+                0,
+                8,
+                5,
+                5,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 3050
+            },
+            {
+              "cluster": 3,
+              "n": 459,
+              "dominant": "none",
+              "dominant_frac": 0.8344226579520697,
+              "counts": [
+                383,
+                19,
+                14,
+                17,
+                0,
+                23,
+                0,
+                1,
+                2
+              ],
+              "n_unlabeled": 3976
+            },
+            {
+              "cluster": 4,
+              "n": 16,
+              "dominant": "none",
+              "dominant_frac": 0.9375,
+              "counts": [
+                15,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 2902
+            },
+            {
+              "cluster": 5,
+              "n": 193,
+              "dominant": "none",
+              "dominant_frac": 0.40414507772020725,
+              "counts": [
+                78,
+                39,
+                1,
+                14,
+                54,
+                6,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3925
+            },
+            {
+              "cluster": 7,
+              "n": 257,
+              "dominant": "none",
+              "dominant_frac": 0.9377431906614786,
+              "counts": [
+                241,
+                1,
+                0,
+                4,
+                8,
+                3,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3435
+            },
+            {
+              "cluster": 8,
+              "n": 515,
+              "dominant": "none",
+              "dominant_frac": 0.8601941747572815,
+              "counts": [
+                443,
+                6,
+                1,
+                22,
+                26,
+                15,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 3120
+            },
+            {
+              "cluster": 9,
+              "n": 22,
+              "dominant": "none",
+              "dominant_frac": 0.6363636363636364,
+              "counts": [
+                14,
+                1,
+                0,
+                1,
+                1,
+                3,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 3069
+            },
+            {
+              "cluster": 10,
+              "n": 102,
+              "dominant": "none",
+              "dominant_frac": 0.7156862745098039,
+              "counts": [
+                73,
+                0,
+                0,
+                8,
+                20,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3111
+            },
+            {
+              "cluster": 11,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4799
+            },
+            {
+              "cluster": 12,
+              "n": 117,
+              "dominant": "none",
+              "dominant_frac": 0.49572649572649574,
+              "counts": [
+                58,
+                2,
+                1,
+                4,
+                51,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3649
+            },
+            {
+              "cluster": 13,
+              "n": 433,
+              "dominant": "none",
+              "dominant_frac": 0.9353348729792148,
+              "counts": [
+                405,
+                5,
+                0,
+                12,
+                2,
+                8,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3441
+            },
+            {
+              "cluster": 14,
+              "n": 30,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5,
+              "counts": [
+                12,
+                1,
+                0,
+                0,
+                15,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3547
+            },
+            {
+              "cluster": 15,
+              "n": 12,
+              "dominant": "none",
+              "dominant_frac": 0.5,
+              "counts": [
+                6,
+                0,
+                0,
+                2,
+                1,
+                2,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 4273
+            },
+            {
+              "cluster": 16,
+              "n": 221,
+              "dominant": "none",
+              "dominant_frac": 0.8099547511312217,
+              "counts": [
+                179,
+                4,
+                0,
+                15,
+                18,
+                4,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 4527
+            },
+            {
+              "cluster": 18,
+              "n": 95,
+              "dominant": "none",
+              "dominant_frac": 0.9052631578947369,
+              "counts": [
+                86,
+                1,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 2927
+            },
+            {
+              "cluster": 19,
+              "n": 43,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5116279069767442,
+              "counts": [
+                18,
+                1,
+                0,
+                0,
+                22,
+                1,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3595
+            },
+            {
+              "cluster": 20,
+              "n": 4,
+              "dominant": "none",
+              "dominant_frac": 0.5,
+              "counts": [
+                2,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 2832
+            },
+            {
+              "cluster": 21,
+              "n": 174,
+              "dominant": "none",
+              "dominant_frac": 0.9770114942528736,
+              "counts": [
+                170,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 2397
+            },
+            {
+              "cluster": 22,
+              "n": 265,
+              "dominant": "none",
+              "dominant_frac": 0.9622641509433962,
+              "counts": [
+                255,
+                0,
+                0,
+                3,
+                4,
+                3,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3014
+            },
+            {
+              "cluster": 23,
+              "n": 37,
+              "dominant": "none",
+              "dominant_frac": 0.3783783783783784,
+              "counts": [
+                14,
+                2,
+                0,
+                4,
+                13,
+                3,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 4004
+            },
+            {
+              "cluster": 24,
+              "n": 119,
+              "dominant": "none",
+              "dominant_frac": 0.9243697478991597,
+              "counts": [
+                110,
+                1,
+                0,
+                3,
+                2,
+                2,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3357
+            },
+            {
+              "cluster": 25,
+              "n": 941,
+              "dominant": "none",
+              "dominant_frac": 0.9574920297555791,
+              "counts": [
+                901,
+                5,
+                0,
+                14,
+                10,
+                7,
+                0,
+                1,
+                3
+              ],
+              "n_unlabeled": 4051
+            },
+            {
+              "cluster": 26,
+              "n": 54,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.37037037037037035,
+              "counts": [
+                9,
+                12,
+                5,
+                20,
+                2,
+                4,
+                0,
+                1,
+                1
+              ],
+              "n_unlabeled": 2473
+            },
+            {
+              "cluster": 28,
+              "n": 131,
+              "dominant": "none",
+              "dominant_frac": 0.7175572519083969,
+              "counts": [
+                94,
+                7,
+                0,
+                11,
+                0,
+                16,
+                1,
+                2,
+                0
+              ],
+              "n_unlabeled": 3572
+            },
+            {
+              "cluster": 29,
+              "n": 75,
+              "dominant": "none",
+              "dominant_frac": 0.92,
+              "counts": [
+                69,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 3657
+            },
+            {
+              "cluster": 30,
+              "n": 425,
+              "dominant": "none",
+              "dominant_frac": 0.9482352941176471,
+              "counts": [
+                403,
+                3,
+                0,
+                4,
+                8,
+                4,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 3701
+            },
+            {
+              "cluster": 31,
+              "n": 1,
+              "dominant": "Center",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 2331
+            },
+            {
+              "cluster": 32,
+              "n": 145,
+              "dominant": "none",
+              "dominant_frac": 0.8896551724137931,
+              "counts": [
+                129,
+                4,
+                0,
+                7,
+                5,
+                0,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4537
+            },
+            {
+              "cluster": 33,
+              "n": 9,
+              "dominant": "none",
+              "dominant_frac": 0.4444444444444444,
+              "counts": [
+                4,
+                0,
+                0,
+                1,
+                3,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3987
+            },
+            {
+              "cluster": 34,
+              "n": 44,
+              "dominant": "none",
+              "dominant_frac": 0.9772727272727273,
+              "counts": [
+                43,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 2769
+            },
+            {
+              "cluster": 35,
+              "n": 375,
+              "dominant": "none",
+              "dominant_frac": 0.8666666666666667,
+              "counts": [
+                325,
+                3,
+                2,
+                14,
+                20,
+                8,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 2604
+            }
+          ],
+          "clusters_defect_only": [
+            {
+              "cluster": 0,
+              "n": 17,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5294117647058824,
+              "counts": [
+                0,
+                1,
+                0,
+                9,
+                2,
+                1,
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "cluster": 1,
+              "n": 23,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.34782608695652173,
+              "counts": [
+                0,
+                3,
+                0,
+                8,
+                5,
+                5,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 3,
+              "n": 76,
+              "dominant": "Loc",
+              "dominant_frac": 0.3026315789473684,
+              "counts": [
+                0,
+                19,
+                14,
+                17,
+                0,
+                23,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "cluster": 4,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 5,
+              "n": 115,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.46956521739130436,
+              "counts": [
+                0,
+                39,
+                1,
+                14,
+                54,
+                6,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 7,
+              "n": 16,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                1,
+                0,
+                4,
+                8,
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 8,
+              "n": 72,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3611111111111111,
+              "counts": [
+                0,
+                6,
+                1,
+                22,
+                26,
+                15,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 9,
+              "n": 8,
+              "dominant": "Loc",
+              "dominant_frac": 0.375,
+              "counts": [
+                0,
+                1,
+                0,
+                1,
+                1,
+                3,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 10,
+              "n": 29,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6896551724137931,
+              "counts": [
+                0,
+                0,
+                0,
+                8,
+                20,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 11,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 12,
+              "n": 59,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.864406779661017,
+              "counts": [
+                0,
+                2,
+                1,
+                4,
+                51,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 13,
+              "n": 28,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.42857142857142855,
+              "counts": [
+                0,
+                5,
+                0,
+                12,
+                2,
+                8,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 14,
+              "n": 18,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8333333333333334,
+              "counts": [
+                0,
+                1,
+                0,
+                0,
+                15,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 15,
+              "n": 6,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                0,
+                0,
+                2,
+                1,
+                2,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 16,
+              "n": 42,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.42857142857142855,
+              "counts": [
+                0,
+                4,
+                0,
+                15,
+                18,
+                4,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 18,
+              "n": 9,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4444444444444444,
+              "counts": [
+                0,
+                1,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 19,
+              "n": 25,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.88,
+              "counts": [
+                0,
+                1,
+                0,
+                0,
+                22,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 20,
+              "n": 2,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 21,
+              "n": 4,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.75,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 22,
+              "n": 10,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4,
+              "counts": [
+                0,
+                0,
+                0,
+                3,
+                4,
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 23,
+              "n": 23,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5652173913043478,
+              "counts": [
+                0,
+                2,
+                0,
+                4,
+                13,
+                3,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 24,
+              "n": 9,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                1,
+                0,
+                3,
+                2,
+                2,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 25,
+              "n": 40,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.35,
+              "counts": [
+                0,
+                5,
+                0,
+                14,
+                10,
+                7,
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "cluster": 26,
+              "n": 45,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4444444444444444,
+              "counts": [
+                0,
+                12,
+                5,
+                20,
+                2,
+                4,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "cluster": 28,
+              "n": 37,
+              "dominant": "Loc",
+              "dominant_frac": 0.43243243243243246,
+              "counts": [
+                0,
+                7,
+                0,
+                11,
+                0,
+                16,
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "cluster": 29,
+              "n": 6,
+              "dominant": "Scratch",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 30,
+              "n": 22,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.36363636363636365,
+              "counts": [
+                0,
+                3,
+                0,
+                4,
+                8,
+                4,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 31,
+              "n": 1,
+              "dominant": "Center",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 32,
+              "n": 16,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4375,
+              "counts": [
+                0,
+                4,
+                0,
+                7,
+                5,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 33,
+              "n": 5,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                3,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 34,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 35,
+              "n": 50,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4,
+              "counts": [
+                0,
+                3,
+                2,
+                14,
+                20,
+                8,
+                0,
+                0,
+                3
+              ]
+            }
+          ],
+          "n_clusters_none_dominated": 96,
+          "unlabeled_in_none_dominated": 330769
+        }
+      }
+    },
+    "geom": {
+      "dim": 256,
+      "k": {
+        "32": {
+          "purity": 0.8646947522879098,
+          "purity_defect_only": 0.5419847328244275,
+          "purity_chance": 0.8482449704598989,
+          "purity_defect_only_chance": 0.41424936386768446,
+          "nmi": 0.08772448189899568,
+          "ari": 0.02005069781302654,
+          "nmi_defect_only": 0.18847697317991513,
+          "n_clusters_used": 32,
+          "clusters": [
+            {
+              "cluster": 0,
+              "n": 2665,
+              "dominant": "none",
+              "dominant_frac": 0.9223264540337711,
+              "counts": [
+                2458,
+                61,
+                2,
+                45,
+                16,
+                66,
+                0,
+                0,
+                17
+              ],
+              "n_unlabeled": 8726
+            },
+            {
+              "cluster": 1,
+              "n": 27,
+              "dominant": "none",
+              "dominant_frac": 0.7037037037037037,
+              "counts": [
+                19,
+                0,
+                0,
+                0,
+                0,
+                8,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 16420
+            },
+            {
+              "cluster": 2,
+              "n": 64,
+              "dominant": "none",
+              "dominant_frac": 0.71875,
+              "counts": [
+                46,
+                1,
+                0,
+                5,
+                6,
+                3,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 18105
+            },
+            {
+              "cluster": 3,
+              "n": 938,
+              "dominant": "none",
+              "dominant_frac": 0.7153518123667377,
+              "counts": [
+                671,
+                0,
+                0,
+                35,
+                205,
+                7,
+                10,
+                7,
+                3
+              ],
+              "n_unlabeled": 12594
+            },
+            {
+              "cluster": 4,
+              "n": 225,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6755555555555556,
+              "counts": [
+                41,
+                2,
+                0,
+                4,
+                152,
+                5,
+                13,
+                6,
+                2
+              ],
+              "n_unlabeled": 12862
+            },
+            {
+              "cluster": 5,
+              "n": 305,
+              "dominant": "none",
+              "dominant_frac": 0.4065573770491803,
+              "counts": [
+                124,
+                88,
+                7,
+                28,
+                4,
+                29,
+                0,
+                18,
+                7
+              ],
+              "n_unlabeled": 12355
+            },
+            {
+              "cluster": 6,
+              "n": 1797,
+              "dominant": "none",
+              "dominant_frac": 0.9571508069003896,
+              "counts": [
+                1720,
+                0,
+                1,
+                42,
+                13,
+                16,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 15076
+            },
+            {
+              "cluster": 7,
+              "n": 1653,
+              "dominant": "none",
+              "dominant_frac": 0.9177253478523896,
+              "counts": [
+                1517,
+                10,
+                0,
+                40,
+                62,
+                16,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 13663
+            },
+            {
+              "cluster": 8,
+              "n": 429,
+              "dominant": "none",
+              "dominant_frac": 0.9137529137529138,
+              "counts": [
+                392,
+                1,
+                0,
+                7,
+                18,
+                6,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 11874
+            },
+            {
+              "cluster": 9,
+              "n": 1,
+              "dominant": "none",
+              "dominant_frac": 1.0,
+              "counts": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 42725
+            },
+            {
+              "cluster": 10,
+              "n": 15,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                15,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 15853
+            },
+            {
+              "cluster": 11,
+              "n": 1628,
+              "dominant": "none",
+              "dominant_frac": 0.8667076167076168,
+              "counts": [
+                1411,
+                28,
+                3,
+                48,
+                84,
+                39,
+                0,
+                1,
+                14
+              ],
+              "n_unlabeled": 11333
+            },
+            {
+              "cluster": 12,
+              "n": 682,
+              "dominant": "none",
+              "dominant_frac": 0.7360703812316716,
+              "counts": [
+                502,
+                1,
+                0,
+                50,
+                120,
+                4,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 14588
+            },
+            {
+              "cluster": 13,
+              "n": 515,
+              "dominant": "none",
+              "dominant_frac": 0.7708737864077669,
+              "counts": [
+                397,
+                3,
+                0,
+                16,
+                88,
+                6,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 13128
+            },
+            {
+              "cluster": 14,
+              "n": 612,
+              "dominant": "none",
+              "dominant_frac": 0.7875816993464052,
+              "counts": [
+                482,
+                0,
+                0,
+                45,
+                75,
+                4,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 10649
+            },
+            {
+              "cluster": 15,
+              "n": 223,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4349775784753363,
+              "counts": [
+                19,
+                1,
+                2,
+                1,
+                97,
+                3,
+                0,
+                95,
+                5
+              ],
+              "n_unlabeled": 15391
+            },
+            {
+              "cluster": 16,
+              "n": 785,
+              "dominant": "none",
+              "dominant_frac": 0.7757961783439491,
+              "counts": [
+                609,
+                44,
+                5,
+                40,
+                29,
+                50,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 13635
+            },
+            {
+              "cluster": 17,
+              "n": 54,
+              "dominant": "Random",
+              "dominant_frac": 0.4444444444444444,
+              "counts": [
+                15,
+                1,
+                0,
+                3,
+                7,
+                1,
+                0,
+                24,
+                3
+              ],
+              "n_unlabeled": 8960
+            },
+            {
+              "cluster": 18,
+              "n": 392,
+              "dominant": "none",
+              "dominant_frac": 0.7959183673469388,
+              "counts": [
+                312,
+                1,
+                0,
+                33,
+                39,
+                7,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 10858
+            },
+            {
+              "cluster": 19,
+              "n": 22,
+              "dominant": "Loc",
+              "dominant_frac": 0.3181818181818182,
+              "counts": [
+                3,
+                0,
+                0,
+                0,
+                6,
+                7,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 11503
+            },
+            {
+              "cluster": 20,
+              "n": 1297,
+              "dominant": "none",
+              "dominant_frac": 0.9097918272937549,
+              "counts": [
+                1180,
+                49,
+                1,
+                39,
+                5,
+                19,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 16411
+            },
+            {
+              "cluster": 21,
+              "n": 822,
+              "dominant": "none",
+              "dominant_frac": 0.9197080291970803,
+              "counts": [
+                756,
+                3,
+                0,
+                19,
+                28,
+                13,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 12099
+            },
+            {
+              "cluster": 22,
+              "n": 362,
+              "dominant": "Center",
+              "dominant_frac": 0.5773480662983426,
+              "counts": [
+                1,
+                209,
+                47,
+                45,
+                1,
+                32,
+                0,
+                25,
+                2
+              ],
+              "n_unlabeled": 9072
+            },
+            {
+              "cluster": 23,
+              "n": 2969,
+              "dominant": "none",
+              "dominant_frac": 0.9427416638598854,
+              "counts": [
+                2799,
+                10,
+                0,
+                59,
+                62,
+                31,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 16357
+            },
+            {
+              "cluster": 24,
+              "n": 47,
+              "dominant": "none",
+              "dominant_frac": 0.8297872340425532,
+              "counts": [
+                39,
+                0,
+                0,
+                0,
+                2,
+                5,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 12456
+            },
+            {
+              "cluster": 25,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 13934
+            },
+            {
+              "cluster": 26,
+              "n": 1624,
+              "dominant": "none",
+              "dominant_frac": 0.8860837438423645,
+              "counts": [
+                1439,
+                3,
+                0,
+                48,
+                114,
+                12,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 11275
+            },
+            {
+              "cluster": 27,
+              "n": 517,
+              "dominant": "none",
+              "dominant_frac": 0.5938104448742747,
+              "counts": [
+                307,
+                2,
+                0,
+                9,
+                191,
+                6,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 12565
+            },
+            {
+              "cluster": 28,
+              "n": 1039,
+              "dominant": "none",
+              "dominant_frac": 0.8055822906641001,
+              "counts": [
+                837,
+                16,
+                3,
+                40,
+                109,
+                20,
+                0,
+                0,
+                14
+              ],
+              "n_unlabeled": 12440
+            },
+            {
+              "cluster": 29,
+              "n": 1297,
+              "dominant": "none",
+              "dominant_frac": 0.9313801079414032,
+              "counts": [
+                1208,
+                0,
+                0,
+                39,
+                31,
+                15,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 15331
+            },
+            {
+              "cluster": 30,
+              "n": 2754,
+              "dominant": "none",
+              "dominant_frac": 0.9415395787944808,
+              "counts": [
+                2593,
+                23,
+                7,
+                42,
+                27,
+                39,
+                0,
+                0,
+                23
+              ],
+              "n_unlabeled": 14177
+            },
+            {
+              "cluster": 31,
+              "n": 136,
+              "dominant": "none",
+              "dominant_frac": 0.5073529411764706,
+              "counts": [
+                69,
+                9,
+                1,
+                10,
+                35,
+                7,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 11158
+            }
+          ],
+          "clusters_defect_only": [
+            {
+              "cluster": 0,
+              "n": 207,
+              "dominant": "Loc",
+              "dominant_frac": 0.3188405797101449,
+              "counts": [
+                0,
+                61,
+                2,
+                45,
+                16,
+                66,
+                0,
+                0,
+                17
+              ]
+            },
+            {
+              "cluster": 1,
+              "n": 8,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                8,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 2,
+              "n": 18,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                1,
+                0,
+                5,
+                6,
+                3,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 3,
+              "n": 267,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.7677902621722846,
+              "counts": [
+                0,
+                0,
+                0,
+                35,
+                205,
+                7,
+                10,
+                7,
+                3
+              ]
+            },
+            {
+              "cluster": 4,
+              "n": 184,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8260869565217391,
+              "counts": [
+                0,
+                2,
+                0,
+                4,
+                152,
+                5,
+                13,
+                6,
+                2
+              ]
+            },
+            {
+              "cluster": 5,
+              "n": 181,
+              "dominant": "Center",
+              "dominant_frac": 0.4861878453038674,
+              "counts": [
+                0,
+                88,
+                7,
+                28,
+                4,
+                29,
+                0,
+                18,
+                7
+              ]
+            },
+            {
+              "cluster": 6,
+              "n": 77,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5454545454545454,
+              "counts": [
+                0,
+                0,
+                1,
+                42,
+                13,
+                16,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 7,
+              "n": 136,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.45588235294117646,
+              "counts": [
+                0,
+                10,
+                0,
+                40,
+                62,
+                16,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 8,
+              "n": 37,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4864864864864865,
+              "counts": [
+                0,
+                1,
+                0,
+                7,
+                18,
+                6,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 10,
+              "n": 15,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                15,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 11,
+              "n": 217,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3870967741935484,
+              "counts": [
+                0,
+                28,
+                3,
+                48,
+                84,
+                39,
+                0,
+                1,
+                14
+              ]
+            },
+            {
+              "cluster": 12,
+              "n": 180,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                1,
+                0,
+                50,
+                120,
+                4,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 13,
+              "n": 118,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.7457627118644068,
+              "counts": [
+                0,
+                3,
+                0,
+                16,
+                88,
+                6,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 14,
+              "n": 130,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5769230769230769,
+              "counts": [
+                0,
+                0,
+                0,
+                45,
+                75,
+                4,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 15,
+              "n": 204,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.47549019607843135,
+              "counts": [
+                0,
+                1,
+                2,
+                1,
+                97,
+                3,
+                0,
+                95,
+                5
+              ]
+            },
+            {
+              "cluster": 16,
+              "n": 176,
+              "dominant": "Loc",
+              "dominant_frac": 0.2840909090909091,
+              "counts": [
+                0,
+                44,
+                5,
+                40,
+                29,
+                50,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 17,
+              "n": 39,
+              "dominant": "Random",
+              "dominant_frac": 0.6153846153846154,
+              "counts": [
+                0,
+                1,
+                0,
+                3,
+                7,
+                1,
+                0,
+                24,
+                3
+              ]
+            },
+            {
+              "cluster": 18,
+              "n": 80,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4875,
+              "counts": [
+                0,
+                1,
+                0,
+                33,
+                39,
+                7,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 19,
+              "n": 19,
+              "dominant": "Loc",
+              "dominant_frac": 0.3684210526315789,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                6,
+                7,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 20,
+              "n": 117,
+              "dominant": "Center",
+              "dominant_frac": 0.4188034188034188,
+              "counts": [
+                0,
+                49,
+                1,
+                39,
+                5,
+                19,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 21,
+              "n": 66,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.42424242424242425,
+              "counts": [
+                0,
+                3,
+                0,
+                19,
+                28,
+                13,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 22,
+              "n": 361,
+              "dominant": "Center",
+              "dominant_frac": 0.5789473684210527,
+              "counts": [
+                0,
+                209,
+                47,
+                45,
+                1,
+                32,
+                0,
+                25,
+                2
+              ]
+            },
+            {
+              "cluster": 23,
+              "n": 170,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.36470588235294116,
+              "counts": [
+                0,
+                10,
+                0,
+                59,
+                62,
+                31,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 24,
+              "n": 8,
+              "dominant": "Loc",
+              "dominant_frac": 0.625,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                2,
+                5,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 25,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 26,
+              "n": 185,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6162162162162163,
+              "counts": [
+                0,
+                3,
+                0,
+                48,
+                114,
+                12,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 27,
+              "n": 210,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.9095238095238095,
+              "counts": [
+                0,
+                2,
+                0,
+                9,
+                191,
+                6,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 28,
+              "n": 202,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5396039603960396,
+              "counts": [
+                0,
+                16,
+                3,
+                40,
+                109,
+                20,
+                0,
+                0,
+                14
+              ]
+            },
+            {
+              "cluster": 29,
+              "n": 89,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.43820224719101125,
+              "counts": [
+                0,
+                0,
+                0,
+                39,
+                31,
+                15,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 30,
+              "n": 161,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.2608695652173913,
+              "counts": [
+                0,
+                23,
+                7,
+                42,
+                27,
+                39,
+                0,
+                0,
+                23
+              ]
+            },
+            {
+              "cluster": 31,
+              "n": 67,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5223880597014925,
+              "counts": [
+                0,
+                9,
+                1,
+                10,
+                35,
+                7,
+                0,
+                0,
+                5
+              ]
+            }
+          ],
+          "n_clusters_none_dominated": 25,
+          "unlabeled_in_none_dominated": 359998
+        },
+        "128": {
+          "purity": 0.8804880874232537,
+          "purity_defect_only": 0.6127226463104326,
+          "purity_chance": 0.8482449704598989,
+          "purity_defect_only_chance": 0.4198473282442748,
+          "nmi": 0.0913994882673569,
+          "ari": 0.007713247544891676,
+          "nmi_defect_only": 0.21454239851928392,
+          "n_clusters_used": 117,
+          "clusters": [
+            {
+              "cluster": 0,
+              "n": 77,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6493506493506493,
+              "counts": [
+                12,
+                3,
+                0,
+                5,
+                50,
+                3,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 2626
+            },
+            {
+              "cluster": 1,
+              "n": 317,
+              "dominant": "none",
+              "dominant_frac": 0.9085173501577287,
+              "counts": [
+                288,
+                5,
+                0,
+                6,
+                4,
+                12,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 2697
+            },
+            {
+              "cluster": 3,
+              "n": 449,
+              "dominant": "none",
+              "dominant_frac": 0.9198218262806236,
+              "counts": [
+                413,
+                4,
+                0,
+                9,
+                12,
+                7,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 2978
+            },
+            {
+              "cluster": 4,
+              "n": 6,
+              "dominant": "none",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                4,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 3562
+            },
+            {
+              "cluster": 5,
+              "n": 11,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                11,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4471
+            },
+            {
+              "cluster": 6,
+              "n": 30,
+              "dominant": "none",
+              "dominant_frac": 0.8,
+              "counts": [
+                24,
+                1,
+                0,
+                1,
+                3,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3460
+            },
+            {
+              "cluster": 7,
+              "n": 460,
+              "dominant": "none",
+              "dominant_frac": 0.9391304347826087,
+              "counts": [
+                432,
+                4,
+                0,
+                14,
+                6,
+                3,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3532
+            },
+            {
+              "cluster": 8,
+              "n": 149,
+              "dominant": "none",
+              "dominant_frac": 0.6912751677852349,
+              "counts": [
+                103,
+                0,
+                0,
+                13,
+                31,
+                0,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 2815
+            },
+            {
+              "cluster": 9,
+              "n": 97,
+              "dominant": "none",
+              "dominant_frac": 0.8762886597938144,
+              "counts": [
+                85,
+                0,
+                1,
+                3,
+                3,
+                2,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 2847
+            },
+            {
+              "cluster": 10,
+              "n": 587,
+              "dominant": "none",
+              "dominant_frac": 0.9676320272572402,
+              "counts": [
+                568,
+                0,
+                0,
+                7,
+                0,
+                10,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 4302
+            },
+            {
+              "cluster": 12,
+              "n": 10,
+              "dominant": "none",
+              "dominant_frac": 0.5,
+              "counts": [
+                5,
+                1,
+                0,
+                3,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3350
+            },
+            {
+              "cluster": 13,
+              "n": 3,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                2,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 2490
+            },
+            {
+              "cluster": 14,
+              "n": 23,
+              "dominant": "none",
+              "dominant_frac": 0.8260869565217391,
+              "counts": [
+                19,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 2418
+            },
+            {
+              "cluster": 15,
+              "n": 171,
+              "dominant": "Center",
+              "dominant_frac": 0.49122807017543857,
+              "counts": [
+                0,
+                84,
+                30,
+                33,
+                0,
+                22,
+                0,
+                2,
+                0
+              ],
+              "n_unlabeled": 2211
+            },
+            {
+              "cluster": 16,
+              "n": 75,
+              "dominant": "Random",
+              "dominant_frac": 0.8133333333333334,
+              "counts": [
+                0,
+                4,
+                5,
+                3,
+                0,
+                2,
+                0,
+                61,
+                0
+              ],
+              "n_unlabeled": 2370
+            },
+            {
+              "cluster": 17,
+              "n": 205,
+              "dominant": "none",
+              "dominant_frac": 0.6146341463414634,
+              "counts": [
+                126,
+                3,
+                0,
+                14,
+                55,
+                5,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 2535
+            },
+            {
+              "cluster": 18,
+              "n": 395,
+              "dominant": "none",
+              "dominant_frac": 0.9772151898734177,
+              "counts": [
+                386,
+                2,
+                0,
+                2,
+                1,
+                2,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 3323
+            },
+            {
+              "cluster": 19,
+              "n": 167,
+              "dominant": "none",
+              "dominant_frac": 0.9101796407185628,
+              "counts": [
+                152,
+                0,
+                1,
+                7,
+                4,
+                2,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 4529
+            },
+            {
+              "cluster": 20,
+              "n": 21,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.42857142857142855,
+              "counts": [
+                8,
+                2,
+                0,
+                0,
+                9,
+                1,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3298
+            },
+            {
+              "cluster": 22,
+              "n": 78,
+              "dominant": "none",
+              "dominant_frac": 0.6025641025641025,
+              "counts": [
+                47,
+                0,
+                0,
+                0,
+                29,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3649
+            },
+            {
+              "cluster": 23,
+              "n": 27,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                7,
+                0,
+                0,
+                1,
+                18,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4037
+            },
+            {
+              "cluster": 24,
+              "n": 61,
+              "dominant": "none",
+              "dominant_frac": 0.7704918032786885,
+              "counts": [
+                47,
+                0,
+                0,
+                2,
+                9,
+                2,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3308
+            },
+            {
+              "cluster": 25,
+              "n": 263,
+              "dominant": "none",
+              "dominant_frac": 0.7908745247148289,
+              "counts": [
+                208,
+                26,
+                0,
+                11,
+                3,
+                11,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 2738
+            },
+            {
+              "cluster": 26,
+              "n": 257,
+              "dominant": "none",
+              "dominant_frac": 0.8404669260700389,
+              "counts": [
+                216,
+                0,
+                0,
+                10,
+                25,
+                1,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 2925
+            },
+            {
+              "cluster": 27,
+              "n": 235,
+              "dominant": "none",
+              "dominant_frac": 0.7191489361702128,
+              "counts": [
+                169,
+                0,
+                0,
+                22,
+                40,
+                2,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 3971
+            },
+            {
+              "cluster": 28,
+              "n": 52,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5,
+              "counts": [
+                20,
+                0,
+                0,
+                4,
+                26,
+                1,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3115
+            },
+            {
+              "cluster": 29,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 5939
+            },
+            {
+              "cluster": 30,
+              "n": 301,
+              "dominant": "none",
+              "dominant_frac": 0.8272425249169435,
+              "counts": [
+                249,
+                1,
+                0,
+                14,
+                30,
+                6,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3586
+            },
+            {
+              "cluster": 31,
+              "n": 65,
+              "dominant": "none",
+              "dominant_frac": 0.8461538461538461,
+              "counts": [
+                55,
+                0,
+                0,
+                1,
+                8,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3363
+            },
+            {
+              "cluster": 32,
+              "n": 7,
+              "dominant": "Center",
+              "dominant_frac": 0.7142857142857143,
+              "counts": [
+                1,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 2403
+            },
+            {
+              "cluster": 33,
+              "n": 983,
+              "dominant": "none",
+              "dominant_frac": 0.9735503560528993,
+              "counts": [
+                957,
+                2,
+                0,
+                9,
+                4,
+                8,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 3769
+            },
+            {
+              "cluster": 34,
+              "n": 77,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.961038961038961,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                74,
+                0,
+                0,
+                2,
+                1
+              ],
+              "n_unlabeled": 3422
+            }
+          ],
+          "clusters_defect_only": [
+            {
+              "cluster": 0,
+              "n": 65,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.7692307692307693,
+              "counts": [
+                0,
+                3,
+                0,
+                5,
+                50,
+                3,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 1,
+              "n": 29,
+              "dominant": "Loc",
+              "dominant_frac": 0.41379310344827586,
+              "counts": [
+                0,
+                5,
+                0,
+                6,
+                4,
+                12,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 3,
+              "n": 36,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                4,
+                0,
+                9,
+                12,
+                7,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 4,
+              "n": 2,
+              "dominant": "Scratch",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 5,
+              "n": 11,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                11,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 6,
+              "n": 6,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                1,
+                0,
+                1,
+                3,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 7,
+              "n": 28,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                4,
+                0,
+                14,
+                6,
+                3,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 8,
+              "n": 46,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6739130434782609,
+              "counts": [
+                0,
+                0,
+                0,
+                13,
+                31,
+                0,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 9,
+              "n": 12,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.25,
+              "counts": [
+                0,
+                0,
+                1,
+                3,
+                3,
+                2,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 10,
+              "n": 19,
+              "dominant": "Loc",
+              "dominant_frac": 0.5263157894736842,
+              "counts": [
+                0,
+                0,
+                0,
+                7,
+                0,
+                10,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 12,
+              "n": 5,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.6,
+              "counts": [
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 13,
+              "n": 3,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                2,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 14,
+              "n": 4,
+              "dominant": "Scratch",
+              "dominant_frac": 0.75,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 15,
+              "n": 171,
+              "dominant": "Center",
+              "dominant_frac": 0.49122807017543857,
+              "counts": [
+                0,
+                84,
+                30,
+                33,
+                0,
+                22,
+                0,
+                2,
+                0
+              ]
+            },
+            {
+              "cluster": 16,
+              "n": 75,
+              "dominant": "Random",
+              "dominant_frac": 0.8133333333333334,
+              "counts": [
+                0,
+                4,
+                5,
+                3,
+                0,
+                2,
+                0,
+                61,
+                0
+              ]
+            },
+            {
+              "cluster": 17,
+              "n": 79,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6962025316455697,
+              "counts": [
+                0,
+                3,
+                0,
+                14,
+                55,
+                5,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 18,
+              "n": 9,
+              "dominant": "Center",
+              "dominant_frac": 0.2222222222222222,
+              "counts": [
+                0,
+                2,
+                0,
+                2,
+                1,
+                2,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 19,
+              "n": 15,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4666666666666667,
+              "counts": [
+                0,
+                0,
+                1,
+                7,
+                4,
+                2,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 20,
+              "n": 13,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6923076923076923,
+              "counts": [
+                0,
+                2,
+                0,
+                0,
+                9,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 22,
+              "n": 31,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.9354838709677419,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                29,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 23,
+              "n": 20,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.9,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                18,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 24,
+              "n": 14,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6428571428571429,
+              "counts": [
+                0,
+                0,
+                0,
+                2,
+                9,
+                2,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 25,
+              "n": 55,
+              "dominant": "Center",
+              "dominant_frac": 0.4727272727272727,
+              "counts": [
+                0,
+                26,
+                0,
+                11,
+                3,
+                11,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 26,
+              "n": 41,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6097560975609756,
+              "counts": [
+                0,
+                0,
+                0,
+                10,
+                25,
+                1,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 27,
+              "n": 66,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6060606060606061,
+              "counts": [
+                0,
+                0,
+                0,
+                22,
+                40,
+                2,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 28,
+              "n": 32,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8125,
+              "counts": [
+                0,
+                0,
+                0,
+                4,
+                26,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 29,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 30,
+              "n": 52,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5769230769230769,
+              "counts": [
+                0,
+                1,
+                0,
+                14,
+                30,
+                6,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 31,
+              "n": 10,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                8,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 32,
+              "n": 6,
+              "dominant": "Center",
+              "dominant_frac": 0.8333333333333334,
+              "counts": [
+                0,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 33,
+              "n": 26,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.34615384615384615,
+              "counts": [
+                0,
+                2,
+                0,
+                9,
+                4,
+                8,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 34,
+              "n": 77,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.961038961038961,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                74,
+                0,
+                0,
+                2,
+                1
+              ]
+            }
+          ],
+          "n_clusters_none_dominated": 86,
+          "unlabeled_in_none_dominated": 281178
+        }
+      }
+    },
+    "noise": {
+      "dim": 256,
+      "k": {
+        "32": {
+          "purity": 0.8588253465652392,
+          "purity_defect_only": 0.5946564885496183,
+          "purity_chance": 0.8482449704598989,
+          "purity_defect_only_chance": 0.41424936386768446,
+          "nmi": 0.0913368829068604,
+          "ari": 0.02933935316786688,
+          "nmi_defect_only": 0.2254142229925642,
+          "n_clusters_used": 27,
+          "clusters": [
+            {
+              "cluster": 0,
+              "n": 2026,
+              "dominant": "none",
+              "dominant_frac": 0.9575518262586377,
+              "counts": [
+                1940,
+                7,
+                0,
+                35,
+                11,
+                19,
+                0,
+                0,
+                14
+              ],
+              "n_unlabeled": 15460
+            },
+            {
+              "cluster": 1,
+              "n": 1256,
+              "dominant": "none",
+              "dominant_frac": 0.8829617834394905,
+              "counts": [
+                1109,
+                6,
+                1,
+                32,
+                82,
+                15,
+                0,
+                0,
+                11
+              ],
+              "n_unlabeled": 11977
+            },
+            {
+              "cluster": 2,
+              "n": 1359,
+              "dominant": "none",
+              "dominant_frac": 0.7019867549668874,
+              "counts": [
+                954,
+                245,
+                19,
+                49,
+                27,
+                58,
+                0,
+                1,
+                6
+              ],
+              "n_unlabeled": 18311
+            },
+            {
+              "cluster": 4,
+              "n": 11,
+              "dominant": "none",
+              "dominant_frac": 0.2727272727272727,
+              "counts": [
+                3,
+                2,
+                0,
+                1,
+                1,
+                1,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 14039
+            },
+            {
+              "cluster": 5,
+              "n": 22,
+              "dominant": "none",
+              "dominant_frac": 0.9090909090909091,
+              "counts": [
+                20,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 14762
+            },
+            {
+              "cluster": 6,
+              "n": 1911,
+              "dominant": "none",
+              "dominant_frac": 0.7687074829931972,
+              "counts": [
+                1469,
+                38,
+                0,
+                96,
+                265,
+                29,
+                0,
+                0,
+                14
+              ],
+              "n_unlabeled": 15900
+            },
+            {
+              "cluster": 8,
+              "n": 347,
+              "dominant": "none",
+              "dominant_frac": 0.8703170028818443,
+              "counts": [
+                302,
+                6,
+                0,
+                20,
+                4,
+                13,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 24355
+            },
+            {
+              "cluster": 9,
+              "n": 231,
+              "dominant": "Random",
+              "dominant_frac": 0.7012987012987013,
+              "counts": [
+                24,
+                9,
+                8,
+                23,
+                1,
+                3,
+                0,
+                162,
+                1
+              ],
+              "n_unlabeled": 5850
+            },
+            {
+              "cluster": 10,
+              "n": 501,
+              "dominant": "none",
+              "dominant_frac": 0.6347305389221557,
+              "counts": [
+                318,
+                3,
+                1,
+                32,
+                134,
+                7,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 13682
+            },
+            {
+              "cluster": 11,
+              "n": 2871,
+              "dominant": "none",
+              "dominant_frac": 0.9683037269244166,
+              "counts": [
+                2780,
+                11,
+                0,
+                32,
+                7,
+                27,
+                0,
+                0,
+                14
+              ],
+              "n_unlabeled": 15912
+            },
+            {
+              "cluster": 13,
+              "n": 18,
+              "dominant": "Loc",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                1,
+                2,
+                1,
+                1,
+                0,
+                12,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 12273
+            },
+            {
+              "cluster": 14,
+              "n": 78,
+              "dominant": "none",
+              "dominant_frac": 0.5641025641025641,
+              "counts": [
+                44,
+                3,
+                0,
+                1,
+                15,
+                8,
+                0,
+                0,
+                7
+              ],
+              "n_unlabeled": 17466
+            },
+            {
+              "cluster": 15,
+              "n": 5377,
+              "dominant": "none",
+              "dominant_frac": 0.9535056723079784,
+              "counts": [
+                5127,
+                47,
+                20,
+                58,
+                2,
+                99,
+                0,
+                0,
+                24
+              ],
+              "n_unlabeled": 20173
+            },
+            {
+              "cluster": 16,
+              "n": 787,
+              "dominant": "none",
+              "dominant_frac": 0.7712833545108005,
+              "counts": [
+                607,
+                2,
+                1,
+                70,
+                95,
+                7,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 11863
+            },
+            {
+              "cluster": 17,
+              "n": 942,
+              "dominant": "none",
+              "dominant_frac": 0.940552016985138,
+              "counts": [
+                886,
+                6,
+                0,
+                11,
+                19,
+                13,
+                0,
+                0,
+                7
+              ],
+              "n_unlabeled": 18974
+            },
+            {
+              "cluster": 18,
+              "n": 558,
+              "dominant": "none",
+              "dominant_frac": 0.8870967741935484,
+              "counts": [
+                495,
+                15,
+                18,
+                5,
+                1,
+                18,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 18580
+            },
+            {
+              "cluster": 19,
+              "n": 64,
+              "dominant": "none",
+              "dominant_frac": 0.828125,
+              "counts": [
+                53,
+                1,
+                0,
+                2,
+                2,
+                6,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 16740
+            },
+            {
+              "cluster": 20,
+              "n": 139,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.7338129496402878,
+              "counts": [
+                24,
+                4,
+                0,
+                4,
+                102,
+                1,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 7618
+            },
+            {
+              "cluster": 21,
+              "n": 316,
+              "dominant": "none",
+              "dominant_frac": 0.9651898734177216,
+              "counts": [
+                305,
+                3,
+                0,
+                1,
+                0,
+                5,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 9930
+            },
+            {
+              "cluster": 22,
+              "n": 1089,
+              "dominant": "none",
+              "dominant_frac": 0.8071625344352618,
+              "counts": [
+                879,
+                13,
+                0,
+                68,
+                101,
+                24,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 17825
+            },
+            {
+              "cluster": 24,
+              "n": 26,
+              "dominant": "Loc",
+              "dominant_frac": 0.34615384615384615,
+              "counts": [
+                7,
+                0,
+                0,
+                0,
+                2,
+                9,
+                0,
+                0,
+                8
+              ],
+              "n_unlabeled": 14026
+            },
+            {
+              "cluster": 25,
+              "n": 284,
+              "dominant": "Center",
+              "dominant_frac": 0.35563380281690143,
+              "counts": [
+                79,
+                101,
+                7,
+                54,
+                17,
+                19,
+                0,
+                2,
+                5
+              ],
+              "n_unlabeled": 11071
+            },
+            {
+              "cluster": 26,
+              "n": 62,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3709677419354839,
+              "counts": [
+                0,
+                3,
+                2,
+                23,
+                0,
+                2,
+                23,
+                9,
+                0
+              ],
+              "n_unlabeled": 4151
+            },
+            {
+              "cluster": 27,
+              "n": 1627,
+              "dominant": "none",
+              "dominant_frac": 0.7430854333128457,
+              "counts": [
+                1209,
+                12,
+                0,
+                38,
+                336,
+                17,
+                0,
+                0,
+                15
+              ],
+              "n_unlabeled": 20200
+            },
+            {
+              "cluster": 28,
+              "n": 3443,
+              "dominant": "none",
+              "dominant_frac": 0.8414173685739181,
+              "counts": [
+                2897,
+                15,
+                1,
+                106,
+                364,
+                45,
+                0,
+                1,
+                14
+              ],
+              "n_unlabeled": 15157
+            },
+            {
+              "cluster": 29,
+              "n": 486,
+              "dominant": "none",
+              "dominant_frac": 0.7962962962962963,
+              "counts": [
+                387,
+                8,
+                0,
+                30,
+                38,
+                19,
+                0,
+                1,
+                3
+              ],
+              "n_unlabeled": 13702
+            },
+            {
+              "cluster": 30,
+              "n": 66,
+              "dominant": "none",
+              "dominant_frac": 0.7272727272727273,
+              "counts": [
+                48,
+                4,
+                0,
+                0,
+                0,
+                14,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 11237
+            }
+          ],
+          "clusters_defect_only": [
+            {
+              "cluster": 0,
+              "n": 86,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4069767441860465,
+              "counts": [
+                0,
+                7,
+                0,
+                35,
+                11,
+                19,
+                0,
+                0,
+                14
+              ]
+            },
+            {
+              "cluster": 1,
+              "n": 147,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5578231292517006,
+              "counts": [
+                0,
+                6,
+                1,
+                32,
+                82,
+                15,
+                0,
+                0,
+                11
+              ]
+            },
+            {
+              "cluster": 2,
+              "n": 405,
+              "dominant": "Center",
+              "dominant_frac": 0.6049382716049383,
+              "counts": [
+                0,
+                245,
+                19,
+                49,
+                27,
+                58,
+                0,
+                1,
+                6
+              ]
+            },
+            {
+              "cluster": 4,
+              "n": 8,
+              "dominant": "Scratch",
+              "dominant_frac": 0.375,
+              "counts": [
+                0,
+                2,
+                0,
+                1,
+                1,
+                1,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 5,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 6,
+              "n": 442,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5995475113122172,
+              "counts": [
+                0,
+                38,
+                0,
+                96,
+                265,
+                29,
+                0,
+                0,
+                14
+              ]
+            },
+            {
+              "cluster": 8,
+              "n": 45,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4444444444444444,
+              "counts": [
+                0,
+                6,
+                0,
+                20,
+                4,
+                13,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 9,
+              "n": 207,
+              "dominant": "Random",
+              "dominant_frac": 0.782608695652174,
+              "counts": [
+                0,
+                9,
+                8,
+                23,
+                1,
+                3,
+                0,
+                162,
+                1
+              ]
+            },
+            {
+              "cluster": 10,
+              "n": 183,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.73224043715847,
+              "counts": [
+                0,
+                3,
+                1,
+                32,
+                134,
+                7,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 11,
+              "n": 91,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3516483516483517,
+              "counts": [
+                0,
+                11,
+                0,
+                32,
+                7,
+                27,
+                0,
+                0,
+                14
+              ]
+            },
+            {
+              "cluster": 13,
+              "n": 17,
+              "dominant": "Loc",
+              "dominant_frac": 0.7058823529411765,
+              "counts": [
+                0,
+                2,
+                1,
+                1,
+                0,
+                12,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 14,
+              "n": 34,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.4411764705882353,
+              "counts": [
+                0,
+                3,
+                0,
+                1,
+                15,
+                8,
+                0,
+                0,
+                7
+              ]
+            },
+            {
+              "cluster": 15,
+              "n": 250,
+              "dominant": "Loc",
+              "dominant_frac": 0.396,
+              "counts": [
+                0,
+                47,
+                20,
+                58,
+                2,
+                99,
+                0,
+                0,
+                24
+              ]
+            },
+            {
+              "cluster": 16,
+              "n": 180,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5277777777777778,
+              "counts": [
+                0,
+                2,
+                1,
+                70,
+                95,
+                7,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 17,
+              "n": 56,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3392857142857143,
+              "counts": [
+                0,
+                6,
+                0,
+                11,
+                19,
+                13,
+                0,
+                0,
+                7
+              ]
+            },
+            {
+              "cluster": 18,
+              "n": 63,
+              "dominant": "Donut",
+              "dominant_frac": 0.2857142857142857,
+              "counts": [
+                0,
+                15,
+                18,
+                5,
+                1,
+                18,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 19,
+              "n": 11,
+              "dominant": "Loc",
+              "dominant_frac": 0.5454545454545454,
+              "counts": [
+                0,
+                1,
+                0,
+                2,
+                2,
+                6,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 20,
+              "n": 115,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8869565217391304,
+              "counts": [
+                0,
+                4,
+                0,
+                4,
+                102,
+                1,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 21,
+              "n": 11,
+              "dominant": "Loc",
+              "dominant_frac": 0.45454545454545453,
+              "counts": [
+                0,
+                3,
+                0,
+                1,
+                0,
+                5,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 22,
+              "n": 210,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.48095238095238096,
+              "counts": [
+                0,
+                13,
+                0,
+                68,
+                101,
+                24,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 24,
+              "n": 19,
+              "dominant": "Loc",
+              "dominant_frac": 0.47368421052631576,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                2,
+                9,
+                0,
+                0,
+                8
+              ]
+            },
+            {
+              "cluster": 25,
+              "n": 205,
+              "dominant": "Center",
+              "dominant_frac": 0.4926829268292683,
+              "counts": [
+                0,
+                101,
+                7,
+                54,
+                17,
+                19,
+                0,
+                2,
+                5
+              ]
+            },
+            {
+              "cluster": 26,
+              "n": 62,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3709677419354839,
+              "counts": [
+                0,
+                3,
+                2,
+                23,
+                0,
+                2,
+                23,
+                9,
+                0
+              ]
+            },
+            {
+              "cluster": 27,
+              "n": 418,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.8038277511961722,
+              "counts": [
+                0,
+                12,
+                0,
+                38,
+                336,
+                17,
+                0,
+                0,
+                15
+              ]
+            },
+            {
+              "cluster": 28,
+              "n": 546,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                15,
+                1,
+                106,
+                364,
+                45,
+                0,
+                1,
+                14
+              ]
+            },
+            {
+              "cluster": 29,
+              "n": 99,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3838383838383838,
+              "counts": [
+                0,
+                8,
+                0,
+                30,
+                38,
+                19,
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "cluster": 30,
+              "n": 18,
+              "dominant": "Loc",
+              "dominant_frac": 0.7777777777777778,
+              "counts": [
+                0,
+                4,
+                0,
+                0,
+                0,
+                14,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "n_clusters_none_dominated": 21,
+          "unlabeled_in_none_dominated": 336245
+        },
+        "128": {
+          "purity": 0.9056647488126037,
+          "purity_defect_only": 0.6862595419847328,
+          "purity_chance": 0.8482835849712322,
+          "purity_defect_only_chance": 0.4246819338422392,
+          "nmi": 0.12817502698220476,
+          "ari": 0.01073326479395963,
+          "nmi_defect_only": 0.2999284153733188,
+          "n_clusters_used": 108,
+          "clusters": [
+            {
+              "cluster": 0,
+              "n": 19,
+              "dominant": "none",
+              "dominant_frac": 0.7368421052631579,
+              "counts": [
+                14,
+                3,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 2647
+            },
+            {
+              "cluster": 1,
+              "n": 173,
+              "dominant": "none",
+              "dominant_frac": 0.8959537572254336,
+              "counts": [
+                155,
+                0,
+                0,
+                12,
+                4,
+                1,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3442
+            },
+            {
+              "cluster": 2,
+              "n": 24,
+              "dominant": "none",
+              "dominant_frac": 0.9583333333333334,
+              "counts": [
+                23,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4266
+            },
+            {
+              "cluster": 5,
+              "n": 467,
+              "dominant": "none",
+              "dominant_frac": 0.9186295503211992,
+              "counts": [
+                429,
+                3,
+                0,
+                17,
+                8,
+                4,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 3683
+            },
+            {
+              "cluster": 6,
+              "n": 239,
+              "dominant": "none",
+              "dominant_frac": 0.9414225941422594,
+              "counts": [
+                225,
+                3,
+                0,
+                4,
+                2,
+                3,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 4071
+            },
+            {
+              "cluster": 7,
+              "n": 39,
+              "dominant": "none",
+              "dominant_frac": 0.7948717948717948,
+              "counts": [
+                31,
+                3,
+                0,
+                2,
+                1,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3067
+            },
+            {
+              "cluster": 8,
+              "n": 13,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5384615384615384,
+              "counts": [
+                2,
+                1,
+                0,
+                7,
+                2,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3383
+            },
+            {
+              "cluster": 9,
+              "n": 130,
+              "dominant": "Random",
+              "dominant_frac": 0.6076923076923076,
+              "counts": [
+                27,
+                4,
+                2,
+                12,
+                2,
+                2,
+                0,
+                79,
+                2
+              ],
+              "n_unlabeled": 3187
+            },
+            {
+              "cluster": 10,
+              "n": 12,
+              "dominant": "Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                5,
+                1,
+                0,
+                0,
+                0,
+                6,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 1840
+            },
+            {
+              "cluster": 11,
+              "n": 46,
+              "dominant": "none",
+              "dominant_frac": 0.8695652173913043,
+              "counts": [
+                40,
+                0,
+                0,
+                2,
+                3,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4575
+            },
+            {
+              "cluster": 12,
+              "n": 668,
+              "dominant": "none",
+              "dominant_frac": 0.9760479041916168,
+              "counts": [
+                652,
+                2,
+                0,
+                2,
+                0,
+                8,
+                0,
+                0,
+                4
+              ],
+              "n_unlabeled": 3436
+            },
+            {
+              "cluster": 14,
+              "n": 7,
+              "dominant": "none",
+              "dominant_frac": 0.5714285714285714,
+              "counts": [
+                4,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 5268
+            },
+            {
+              "cluster": 15,
+              "n": 6,
+              "dominant": "Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 2428
+            },
+            {
+              "cluster": 17,
+              "n": 480,
+              "dominant": "none",
+              "dominant_frac": 0.8458333333333333,
+              "counts": [
+                406,
+                10,
+                0,
+                37,
+                11,
+                14,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 2670
+            },
+            {
+              "cluster": 18,
+              "n": 216,
+              "dominant": "Center",
+              "dominant_frac": 0.7685185185185185,
+              "counts": [
+                8,
+                166,
+                17,
+                6,
+                0,
+                15,
+                0,
+                2,
+                2
+              ],
+              "n_unlabeled": 3067
+            },
+            {
+              "cluster": 19,
+              "n": 442,
+              "dominant": "none",
+              "dominant_frac": 0.918552036199095,
+              "counts": [
+                406,
+                0,
+                0,
+                26,
+                3,
+                4,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 3357
+            },
+            {
+              "cluster": 20,
+              "n": 878,
+              "dominant": "none",
+              "dominant_frac": 0.9772209567198178,
+              "counts": [
+                858,
+                1,
+                0,
+                11,
+                2,
+                3,
+                0,
+                0,
+                3
+              ],
+              "n_unlabeled": 4922
+            },
+            {
+              "cluster": 22,
+              "n": 43,
+              "dominant": "none",
+              "dominant_frac": 0.8372093023255814,
+              "counts": [
+                36,
+                3,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 4880
+            },
+            {
+              "cluster": 23,
+              "n": 36,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.2777777777777778,
+              "counts": [
+                0,
+                5,
+                5,
+                10,
+                0,
+                2,
+                4,
+                10,
+                0
+              ],
+              "n_unlabeled": 815
+            },
+            {
+              "cluster": 24,
+              "n": 472,
+              "dominant": "none",
+              "dominant_frac": 0.9703389830508474,
+              "counts": [
+                458,
+                3,
+                0,
+                4,
+                0,
+                2,
+                0,
+                0,
+                5
+              ],
+              "n_unlabeled": 3368
+            },
+            {
+              "cluster": 25,
+              "n": 69,
+              "dominant": "none",
+              "dominant_frac": 0.6086956521739131,
+              "counts": [
+                42,
+                7,
+                1,
+                6,
+                9,
+                1,
+                0,
+                1,
+                2
+              ],
+              "n_unlabeled": 5159
+            },
+            {
+              "cluster": 26,
+              "n": 20,
+              "dominant": "none",
+              "dominant_frac": 0.7,
+              "counts": [
+                14,
+                2,
+                0,
+                1,
+                2,
+                0,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3726
+            },
+            {
+              "cluster": 27,
+              "n": 67,
+              "dominant": "none",
+              "dominant_frac": 0.9701492537313433,
+              "counts": [
+                65,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3961
+            },
+            {
+              "cluster": 28,
+              "n": 231,
+              "dominant": "none",
+              "dominant_frac": 0.9047619047619048,
+              "counts": [
+                209,
+                2,
+                0,
+                7,
+                10,
+                2,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 4673
+            },
+            {
+              "cluster": 29,
+              "n": 21,
+              "dominant": "none",
+              "dominant_frac": 0.8571428571428571,
+              "counts": [
+                18,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3246
+            },
+            {
+              "cluster": 30,
+              "n": 677,
+              "dominant": "none",
+              "dominant_frac": 0.8906942392909897,
+              "counts": [
+                603,
+                21,
+                12,
+                9,
+                0,
+                26,
+                0,
+                0,
+                6
+              ],
+              "n_unlabeled": 3860
+            },
+            {
+              "cluster": 31,
+              "n": 245,
+              "dominant": "none",
+              "dominant_frac": 0.9918367346938776,
+              "counts": [
+                243,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 5068
+            },
+            {
+              "cluster": 32,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 3102
+            },
+            {
+              "cluster": 33,
+              "n": 787,
+              "dominant": "none",
+              "dominant_frac": 0.9783989834815756,
+              "counts": [
+                770,
+                3,
+                0,
+                4,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "n_unlabeled": 3746
+            },
+            {
+              "cluster": 34,
+              "n": 209,
+              "dominant": "none",
+              "dominant_frac": 0.8947368421052632,
+              "counts": [
+                187,
+                1,
+                0,
+                6,
+                12,
+                3,
+                0,
+                0,
+                0
+              ],
+              "n_unlabeled": 4426
+            },
+            {
+              "cluster": 35,
+              "n": 519,
+              "dominant": "none",
+              "dominant_frac": 0.7610789980732178,
+              "counts": [
+                395,
+                4,
+                0,
+                27,
+                88,
+                3,
+                0,
+                0,
+                2
+              ],
+              "n_unlabeled": 4023
+            },
+            {
+              "cluster": 36,
+              "n": 23,
+              "dominant": "none",
+              "dominant_frac": 0.391304347826087,
+              "counts": [
+                9,
+                5,
+                0,
+                1,
+                7,
+                0,
+                0,
+                1,
+                0
+              ],
+              "n_unlabeled": 2859
+            }
+          ],
+          "clusters_defect_only": [
+            {
+              "cluster": 0,
+              "n": 5,
+              "dominant": "Center",
+              "dominant_frac": 0.6,
+              "counts": [
+                0,
+                3,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 1,
+              "n": 18,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                0,
+                0,
+                12,
+                4,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 2,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 5,
+              "n": 38,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.4473684210526316,
+              "counts": [
+                0,
+                3,
+                0,
+                17,
+                8,
+                4,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 6,
+              "n": 14,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.2857142857142857,
+              "counts": [
+                0,
+                3,
+                0,
+                4,
+                2,
+                3,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 7,
+              "n": 8,
+              "dominant": "Center",
+              "dominant_frac": 0.375,
+              "counts": [
+                0,
+                3,
+                0,
+                2,
+                1,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 8,
+              "n": 11,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.6363636363636364,
+              "counts": [
+                0,
+                1,
+                0,
+                7,
+                2,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 9,
+              "n": 103,
+              "dominant": "Random",
+              "dominant_frac": 0.7669902912621359,
+              "counts": [
+                0,
+                4,
+                2,
+                12,
+                2,
+                2,
+                0,
+                79,
+                2
+              ]
+            },
+            {
+              "cluster": 10,
+              "n": 7,
+              "dominant": "Loc",
+              "dominant_frac": 0.8571428571428571,
+              "counts": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                6,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 11,
+              "n": 6,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                0,
+                0,
+                2,
+                3,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 12,
+              "n": 16,
+              "dominant": "Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                2,
+                0,
+                2,
+                0,
+                8,
+                0,
+                0,
+                4
+              ]
+            },
+            {
+              "cluster": 14,
+              "n": 3,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 15,
+              "n": 5,
+              "dominant": "Loc",
+              "dominant_frac": 0.6,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 17,
+              "n": 74,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                10,
+                0,
+                37,
+                11,
+                14,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 18,
+              "n": 208,
+              "dominant": "Center",
+              "dominant_frac": 0.7980769230769231,
+              "counts": [
+                0,
+                166,
+                17,
+                6,
+                0,
+                15,
+                0,
+                2,
+                2
+              ]
+            },
+            {
+              "cluster": 19,
+              "n": 36,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.7222222222222222,
+              "counts": [
+                0,
+                0,
+                0,
+                26,
+                3,
+                4,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 20,
+              "n": 20,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.55,
+              "counts": [
+                0,
+                1,
+                0,
+                11,
+                2,
+                3,
+                0,
+                0,
+                3
+              ]
+            },
+            {
+              "cluster": 22,
+              "n": 7,
+              "dominant": "Center",
+              "dominant_frac": 0.42857142857142855,
+              "counts": [
+                0,
+                3,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 23,
+              "n": 36,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.2777777777777778,
+              "counts": [
+                0,
+                5,
+                5,
+                10,
+                0,
+                2,
+                4,
+                10,
+                0
+              ]
+            },
+            {
+              "cluster": 24,
+              "n": 14,
+              "dominant": "Scratch",
+              "dominant_frac": 0.35714285714285715,
+              "counts": [
+                0,
+                3,
+                0,
+                4,
+                0,
+                2,
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "cluster": 25,
+              "n": 27,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                7,
+                1,
+                6,
+                9,
+                1,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "cluster": 26,
+              "n": 6,
+              "dominant": "Center",
+              "dominant_frac": 0.3333333333333333,
+              "counts": [
+                0,
+                2,
+                0,
+                1,
+                2,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 27,
+              "n": 2,
+              "dominant": "Edge-Loc",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 28,
+              "n": 22,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.45454545454545453,
+              "counts": [
+                0,
+                2,
+                0,
+                7,
+                10,
+                2,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 29,
+              "n": 3,
+              "dominant": "Loc",
+              "dominant_frac": 0.6666666666666666,
+              "counts": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 30,
+              "n": 74,
+              "dominant": "Loc",
+              "dominant_frac": 0.35135135135135137,
+              "counts": [
+                0,
+                21,
+                12,
+                9,
+                0,
+                26,
+                0,
+                0,
+                6
+              ]
+            },
+            {
+              "cluster": 31,
+              "n": 2,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 32,
+              "n": 1,
+              "dominant": "Loc",
+              "dominant_frac": 1.0,
+              "counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 33,
+              "n": 17,
+              "dominant": "Loc",
+              "dominant_frac": 0.5294117647058824,
+              "counts": [
+                0,
+                3,
+                0,
+                4,
+                0,
+                9,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "cluster": 34,
+              "n": 22,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5454545454545454,
+              "counts": [
+                0,
+                1,
+                0,
+                6,
+                12,
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "cluster": 35,
+              "n": 124,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.7096774193548387,
+              "counts": [
+                0,
+                4,
+                0,
+                27,
+                88,
+                3,
+                0,
+                0,
+                2
+              ]
+            },
+            {
+              "cluster": 36,
+              "n": 14,
+              "dominant": "Edge-Ring",
+              "dominant_frac": 0.5,
+              "counts": [
+                0,
+                5,
+                0,
+                1,
+                7,
+                0,
+                0,
+                1,
+                0
+              ]
+            }
+          ],
+          "n_clusters_none_dominated": 81,
+          "unlabeled_in_none_dominated": 299879
+        }
+      }
+    }
+  },
+  "majority_baseline": 0.8482449704598989
+}

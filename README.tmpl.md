@@ -50,8 +50,8 @@ flowchart LR
   one.** The SimCLR encoder — the one that could actually surface an *unknown*
   pattern, because it never saw a label — reaches only
   {{clu.simclr.purity_defect}}, **below the raw-pixel PCA floor of
-  {{clu.pixel_pca.purity_defect}}** under the identical protocol. An augmentation
-  ablation says which invariance costs it. Pretraining likewise buys labels only
+  {{clu.pixel_pca.purity_defect}}** under the identical protocol, and no subset
+  of its augmentations recovers it. Pretraining likewise buys labels only
   in the 1%-label regime ({{lf.ssl.0.01}} vs {{lf.scratch.0.01}} from scratch)
   and nothing at 100% ({{lf.ssl.1}} vs {{lf.scratch.1}}).
 
@@ -169,9 +169,10 @@ each, selected on val:
 
 | strategy | test macro-F1 |
 |---|---|
-| plain BCE + d4 augmentation *(selected on val)* | see [`RESULTS.md`](RESULTS.md) |
-| BCE + pos-weight, focal, balanced sampling, 9-way softmax | within {{sweep.spread}} of each other |
-| **plain BCE, no augmentation** | **{{sweep.noaug_macro}}** — {{sweep.noaug_gap}} worse |
+| best of {plain BCE, pos-weight, focal, balanced sampling, 9-way softmax} | {{sweep.best}} |
+| ...and the spread across all five of them | {{sweep.spread}} |
+| three seeds of *one* of those configurations | {{seed.macro_range}} |
+| **the same, with the d4 augmentation removed** | **{{sweep.noaug_macro}}** — {{sweep.noaug_gap}} worse |
 
 The finding is a negative one and it is the useful part: **reweighting the loss
 barely matters here.** Pos-weighting, focal loss, balanced sampling and a 9-way
@@ -241,7 +242,7 @@ a baseline is unreadable:
 | supervised classifier features | {{clu.supervised.best_k}} | {{clu.supervised.purity}} | **{{clu.supervised.purity_defect}}** | {{clu.supervised.nmi_defect}} |
 | SimCLR, never saw a label | {{clu.simclr.best_k}} | {{clu.simclr.purity}} | **{{clu.simclr.purity_defect}}** | {{clu.simclr.nmi_defect}} |
 | raw-pixel PCA (floor) | {{clu.pixel_pca.best_k}} | {{clu.pixel_pca.purity}} | {{clu.pixel_pca.purity_defect}} | {{clu.pixel_pca.nmi_defect}} |
-| chance (labels shuffled within the scored subset) | | {{clu.majority}} | {{clu.simclr.chance_defect}} | 0 |
+| chance (labels shuffled within the scored subset) | | {{clu.majority}} | {{clu.supervised.chance_defect}} | 0 |
 
 ![cluster](assets/fig_cluster.png)
 
@@ -265,7 +266,7 @@ Contrastive pretraining on 447k wafer maps produced a representation that groups
 defects *less* well than the pixels it was built from. The linear probe in the
 next section says the same thing from the other direction.
 
-### Which view-invariance destroys the defect signal
+### Which view-invariance costs most — and why that is not the problem
 
 SimCLR learns to ignore whatever the augmentations change, so a bad augmentation
 set does not underfit — it deletes the signal on purpose. Same encoder, same 25
@@ -280,8 +281,17 @@ augmentation set changes:
 | all three (the row above) | {{aug.all.k32}} | {{aug.all.k128}} |
 | raw-pixel PCA (floor) | {{clu.pixel_pca.pd_k32}} | {{clu.pixel_pca.pd_k128}} |
 
-Read against the pixel floor, not against each other: the question is not which
-augmentation set is least bad but whether any of them beats not learning at all.
+Two things fall out. The **mild translate/scale is the invariance that costs**:
+dropping it takes k=128 purity from {{aug.all.k128}} to {{aug.noise.k128}}, which
+makes sense — where a cluster sits on the wafer is half of what separates
+Center from Edge-Loc, and asking the encoder to ignore small shifts asks it to
+ignore that. The Bernoulli die resampling is the one that *helps*, which also
+makes sense: it is the only augmentation that models the actual physics of the
+measurement. But read against the pixel floor rather than against each other,
+**all four variants lose**: the best of them is {{aug.noise.k128}} against
+{{clu.pixel_pca.pd_k128}} for a 64-component PCA. The deficit is not a badly
+chosen view set. It is the objective — and no amount of re-picking augmentations
+inside this recipe is going to close a gap that large.
 
 ## Does self-supervision buy labels?
 

@@ -1,0 +1,15 @@
+{
+  "args": {
+    "out": "runs/ssl_d4",
+    "epochs": 25,
+    "batch": 1024,
+    "lr": 0.002,
+    "width": 64,
+    "tau": 0.2,
+    "seed": 0,
+    "aug": "d4"
+  },
+  "n_unlabeled_train": 447573,
+  "final_nt_xent": 2.9384727739905876,
+  "wall_min": 20.408632556597393
+}

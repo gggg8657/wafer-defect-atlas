@@ -1,0 +1,15 @@
+{
+  "args": {
+    "out": "runs/ssl_noise",
+    "epochs": 25,
+    "batch": 1024,
+    "lr": 0.002,
+    "width": 64,
+    "tau": 0.2,
+    "seed": 0,
+    "aug": "d4,noise"
+  },
+  "n_unlabeled_train": 447573,
+  "final_nt_xent": 2.9698000979914547,
+  "wall_min": 23.128020123640695
+}

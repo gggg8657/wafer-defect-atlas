@@ -183,6 +183,19 @@ k-means is fitted on 447,573 **unlabeled** wafer maps from train lots. The centr
 | 128 | 0.9134 | 0.8482 | 0.7766 | 0.4211 | 0.1481 | 0.4487 | 0.0107 |
 
 
+### Which SimCLR view-invariance costs the defect signal
+
+Same encoder, same 25 epochs, same unlabeled pool, same k-means and the same held-out labeled probe -- only the augmentation set changes.  Defect-only purity:
+
+| augmentations | k=32 | k=128 |
+|---|---|---|
+| d4 only | 0.5046 | 0.5606 |
+| d4 + translate/scale | 0.5420 | 0.6127 |
+| d4 + die dropout/salt noise | 0.5947 | 0.6863 |
+| all three (the run above) | 0.5420 | 0.6229 |
+| raw-pixel PCA (floor) | 0.7333 | 0.7766 |
+
+
 ## Self-supervised pretraining: does it buy labels?
 
 SimCLR on 447,573 unlabeled wafer maps from train lots (21 min, 1x H100), then the same classifier head. Every cell gets the identical optimizer budget (6,000 steps) whatever fraction of labels it sees, so the comparison is about the initialization.

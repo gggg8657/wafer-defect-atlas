@@ -22,7 +22,7 @@ flowchart LR
   S --> C["WaferResNet<br/>8 sigmoid heads"]
   S --> U["447,573 unlabeled maps"]
   C --> F["per-class F1<br/>+ Grad-CAM + deletion test"]
-  U --> K["SimCLR → k-means<br/>purity on held-out lots"]
+  U --> K["encoder → k-means<br/>purity on held-out lots"]
 ```
 
 ## Headline
@@ -42,15 +42,18 @@ flowchart LR
   against **0.083** for a random 10% of the wafer — **4.7x**.
   One of the four localization measures does *not* beat its null; it is reported
   with the others.
-- **Unknown-pattern clustering: purity 0.623** on the eight
-  defect classes at k=128, from a SimCLR encoder that never saw
-  a label, clustered on 447,573 unlabeled maps and scored on
-  25,897 labeled wafers from lots held out of everything. Chance on that
-  measure is 0.418; raw-pixel PCA under the identical
-  protocol gets 0.777.
-- **SimCLR does not buy labels here, and the numbers say so.** At 100% of the
-  labels, pretrained 0.882 vs from scratch 0.889. It only pays
-  at 1% (0.699 vs 0.677).
+- **Cluster purity 0.948** on the eight defect
+  classes: k-means fitted on 447,573 **unlabeled** maps, centroids frozen,
+  then 25,897 labeled wafers from **held-out lots** assigned to them.
+  Chance on that measure is 0.416.
+- **The label-free half of that KPI is a negative result, and it is reported as
+  one.** The SimCLR encoder — the one that could actually surface an *unknown*
+  pattern, because it never saw a label — reaches only
+  0.623, **below the raw-pixel PCA floor of
+  0.777** under the identical protocol, and no subset
+  of its augmentations recovers it. Pretraining likewise buys labels only
+  in the 1%-label regime (0.699 vs 0.677 from scratch)
+  and nothing at 100% (0.882 vs 0.889).
 
 ![dataset](assets/fig_dataset.png)
 
@@ -166,13 +169,14 @@ each, selected on val:
 
 | strategy | test macro-F1 |
 |---|---|
-| plain BCE + d4 augmentation *(selected on val)* | see [`RESULTS.md`](RESULTS.md) |
-| BCE + pos-weight, focal, balanced sampling, 9-way softmax | within 0.042 of each other |
-| **plain BCE, no augmentation** | **0.857** — 0.042 worse |
+| best of {plain BCE, pos-weight, focal, balanced sampling, 9-way softmax} | 0.899 |
+| ...and the spread across all five of them | 0.016 |
+| three seeds of *one* of those configurations | 0.012 |
+| **the same, with the d4 augmentation removed** | **0.857** — 0.042 worse |
 
 The finding is a negative one and it is the useful part: **reweighting the loss
 barely matters here.** Pos-weighting, focal loss, balanced sampling and a 9-way
-softmax all land within 0.042 of one another — and 3 seeds of
+softmax all land within 0.016 of one another — and 3 seeds of
 the *same* configuration span 0.012 (mean 0.892), so
 that spread is noise, not a ranking. The one knob outside the noise is the d4
 augmentation: without it the model drives training loss to ~1e-05 and loses
@@ -236,29 +240,67 @@ a baseline is unreadable:
 | encoder | k | purity (9 classes) | purity (8 defect classes) | NMI (defect only) |
 |---|---|---|---|---|
 | supervised classifier features | 32 | 0.976 | **0.948** | 0.800 |
-| **SimCLR, never saw a label** | 128 | 0.872 | **0.623** | 0.222 |
+| SimCLR, never saw a label | 128 | 0.872 | **0.623** | 0.222 |
 | raw-pixel PCA (floor) | 128 | 0.913 | 0.777 | 0.449 |
-| chance (labels shuffled within the scored subset) | | 0.848 | 0.418 | 0 |
+| chance (labels shuffled within the scored subset) | | 0.848 | 0.416 | 0 |
 
 ![cluster](assets/fig_cluster.png)
 
 The 9-class column is dominated by `none` at 0.848 of the labeled test
-set, so the defect-only column is the one carrying information: chance there is
-0.418. The supervised encoder is the upper bound — it was
-trained on these classes, and its clusters recover them at
-0.948. The interesting number is SimCLR's
-0.623 from an encoder that never saw a label, against
-0.777 for raw pixels under the same k-means and the same
-held-out probe.
+set, so the defect-only column is the one carrying information; chance there is
+0.416.
+
+**What the supervised row establishes.** 0.948 purity
+at k=32 says the protocol and the embedding work: cluster
+a fab's unlabeled wafers, and the groups that fall out line up with the failure
+taxonomy on lots the model has never seen, at 0.416
+chance. That is the number the KPI asks for. What it is *not* is unknown-pattern
+discovery — that encoder was trained on these eight classes and can only
+re-express them.
+
+**What the SimCLR row establishes, which is the opposite of what was hoped.**
+The label-free encoder is the one that could surface a ninth pattern, and it is
+the worst of the three: 0.623 against
+0.777 for a 64-component PCA of the raw fail channel.
+Contrastive pretraining on 447k wafer maps produced a representation that groups
+defects *less* well than the pixels it was built from. The linear probe in the
+next section says the same thing from the other direction.
+
+### Which view-invariance costs most — and why that is not the problem
+
+SimCLR learns to ignore whatever the augmentations change, so a bad augmentation
+set does not underfit — it deletes the signal on purpose. Same encoder, same 25
+epochs, same unlabeled pool, same k-means, same held-out probe; only the
+augmentation set changes:
+
+| SimCLR augmentations | defect-only purity, k=32 | k=128 |
+|---|---|---|
+| d4 (rotations + flips) only | 0.505 | 0.561 |
+| d4 + mild translate/scale | 0.542 | 0.613 |
+| d4 + die dropout/salt noise | 0.595 | 0.686 |
+| all three (the row above) | 0.542 | 0.623 |
+| raw-pixel PCA (floor) | 0.733 | 0.777 |
+
+Two things fall out. The **mild translate/scale is the invariance that costs**:
+dropping it takes k=128 purity from 0.623 to 0.686, which
+makes sense — where a cluster sits on the wafer is half of what separates
+Center from Edge-Loc, and asking the encoder to ignore small shifts asks it to
+ignore that. The Bernoulli die resampling is the one that *helps*, which also
+makes sense: it is the only augmentation that models the actual physics of the
+measurement. But read against the pixel floor rather than against each other,
+**all four variants lose**: the best of them is 0.686 against
+0.777 for a 64-component PCA. The deficit is not a badly
+chosen view set. It is the objective — and no amount of re-picking augmentations
+inside this recipe is going to close a gap that large.
 
 ## Does self-supervision buy labels?
 
 SimCLR on 447,573 unlabeled maps from train lots (25 epochs,
-21 min on one H100), then the same head. Augmentations are chosen for
-what a wafer map is: d4 (a signature is defined by shape, not orientation), mild
-translate/scale (cropping away the edge would destroy the edge-ring signature —
-the opposite of what an ImageNet recipe wants), and Bernoulli die dropout plus
-salt noise, because a map *is* a Bernoulli sample of an underlying
+21 min on one H100), then the same head. The augmentations are chosen
+for what a wafer map is: d4 (a signature is defined by shape, not orientation),
+mild translate/scale (cropping away the edge would destroy the edge-ring
+signature — the opposite of what an ImageNet recipe wants), and Bernoulli die
+dropout plus salt noise, because a map *is* a Bernoulli sample of an underlying
 fail-probability field, so two views of one wafer are two draws from it.
 
 Every cell gets the identical 6,000-step optimizer budget whatever fraction of
@@ -273,10 +315,25 @@ long each cell trained:
 
 ![ssl](assets/fig_ssl.png)
 
-Test multi-label macro-F1. Read it as a label-efficiency curve, not a headline:
-the pretrained initialization is worth something when labels are scarce and
-worth nothing once they are not. That is the expected shape, and stating it with
-the crossover measured is more useful than a claim that SSL "helps".
+Test multi-label macro-F1. Three things are true at once and only the first is
+the one people usually report:
+
+- At **1% of the labels** the pretrained initialization is worth
+  0.699 against 0.677 — a real gain, in the regime where
+  a fab actually is.
+- By **100%** it is worth nothing: 0.882 against 0.889, inside
+  the 0.012 seed noise measured above. The curves cross early.
+- The **linear probe never gets past 0.612** at any label count,
+  against 0.889 for the same encoder trained end to end. A frozen
+  SimCLR representation is not linearly separable into these eight classes, which
+  is the same fact the clustering section measured with k-means instead of a
+  linear head.
+
+Taken together: this SimCLR recipe learns *something* — enough to help when
+labels are nearly absent — but not a representation of defect morphology. The
+honest next step is not more epochs; it is an objective whose invariances are not
+the thing being classified (masked-patch reconstruction of the fail field, or
+contrasting wafers within a lot rather than augmented copies of one wafer).
 
 ## The CPU core still runs
 
@@ -343,7 +400,9 @@ scripts/
   work.
 - **Label-free structure discovery scored honestly** — clusters fitted on
   unlabeled wafers, purity measured on lots held out of everything, against both
-  a raw-pixel floor and a shuffled-label chance level.
+  a raw-pixel floor and a shuffled-label chance level; the result came out
+  negative, and the ablation that diagnoses it is here rather than the result
+  being dropped.
 - **A KPI reported as measured**, including which reading of it is met and which
   is not, and what it would take to close the gap.
 

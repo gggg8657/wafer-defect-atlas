@@ -320,13 +320,15 @@ def render_readme(pr, best, gc, cl, lf, sweep_rows, best_tag, sel, ssl):
               "seed.wtd_mean": f(ss["test_weighted_f1_9_mean"], 4),
               "seed.wtd_range": f(ss["test_weighted_f1_9_range"], 4)}
     if sweep_rows:
-        V["sweep.spread"] = f(max(float(r[3]) for r in sweep_rows) -
-                              min(float(r[3]) for r in sweep_rows))
+        # the spread that matters is across the *loss/sampling* variants; the
+        # no-augmentation row is a different question and is quoted separately
+        aug_rows = [float(r[3]) for r in sweep_rows if "no augmentation" not in r[0]]
+        V["sweep.spread"] = f(max(aug_rows) - min(aug_rows))
+        V["sweep.best"] = f(max(aug_rows))
         noaug = [r for r in sweep_rows if "no augmentation" in r[0]]
         if noaug:
             V["sweep.noaug_macro"] = noaug[0][3]
-            V["sweep.noaug_gap"] = f(max(float(r[3]) for r in sweep_rows)
-                                     - float(noaug[0][3]))
+            V["sweep.noaug_gap"] = f(max(aug_rows) - float(noaug[0][3]))
     if gc:
         m_ = gc["mean"]
         V |= {"cam.lift": f"{m_['top10_cam_fail_lift']:.2f}",
