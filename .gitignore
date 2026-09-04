@@ -4,3 +4,6 @@ __pycache__/
 .venv/
 *.pt
 .DS_Store
+data/
+runs/*.log
+runs/**/*.npy

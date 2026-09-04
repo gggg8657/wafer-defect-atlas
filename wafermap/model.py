@@ -53,3 +53,61 @@ def grad_cam(model, x, cls=None):
     cam = cam - cam.amin(dim=(1, 2), keepdim=True)
     cam = cam / cam.amax(dim=(1, 2), keepdim=True).clamp_min(1e-8)
     return cam.detach()
+
+
+# --------------------------------------------------------------------------
+# The real-data encoder.  Same `features / forward / embed` protocol as
+# WaferCNN above, so `grad_cam` works on either without a special case.
+# --------------------------------------------------------------------------
+class _Block(nn.Module):
+    """Pre-activation residual block."""
+
+    def __init__(self, cin, cout, stride=1):
+        super().__init__()
+        self.bn1 = nn.BatchNorm2d(cin)
+        self.c1 = nn.Conv2d(cin, cout, 3, stride, 1, bias=False)
+        self.bn2 = nn.BatchNorm2d(cout)
+        self.c2 = nn.Conv2d(cout, cout, 3, 1, 1, bias=False)
+        self.skip = (nn.Identity() if stride == 1 and cin == cout
+                     else nn.Conv2d(cin, cout, 1, stride, bias=False))
+
+    def forward(self, x):
+        h = F.relu(self.bn1(x))
+        out = self.c2(F.relu(self.bn2(self.c1(h))))
+        return out + self.skip(h if isinstance(self.skip, nn.Conv2d) else x)
+
+
+class WaferResNet(nn.Module):
+    """~1.5M-parameter residual CNN for 64x64 two-channel wafer maps.
+
+    Stops at an 8x8 feature map rather than pooling all the way down: Grad-CAM
+    is only as sharp as the last conv layer, and 8x8 over a 64x64 wafer is
+    ~5 mm per cell on a 300 mm wafer -- fine enough to tell a centre cluster
+    from an edge ring, which is what the localization claim needs.
+    """
+
+    def __init__(self, n_out=8, in_ch=2, width=32, blocks=(2, 2, 2)):
+        super().__init__()
+        self.stem = nn.Conv2d(in_ch, width, 3, 1, 1, bias=False)
+        layers, cin = [], width
+        for i, nb in enumerate(blocks):
+            cout = width * 2 ** i
+            for b in range(nb):
+                layers.append(_Block(cin, cout, stride=2 if b == 0 else 1))
+                cin = cout
+        self.blocks = nn.Sequential(*layers)
+        self.bn = nn.BatchNorm2d(cin)
+        self.n_feat = cin
+        self.head = nn.Linear(cin, n_out)
+        self.drop = nn.Dropout(0.1)
+
+    def features(self, x):
+        return F.relu(self.bn(self.blocks(self.stem(x))))
+
+    def forward(self, x):
+        f = self.features(x)
+        return self.head(self.drop(F.adaptive_avg_pool2d(f, 1).flatten(1)))
+
+    def embed(self, x):
+        """Pooled features -- the SSL / clustering seam."""
+        return F.adaptive_avg_pool2d(self.features(x), 1).flatten(1)
