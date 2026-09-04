@@ -116,6 +116,11 @@ def main():
     p.add_argument("--label-frac", type=float, default=1.0)
     p.add_argument("--init", default="", help="SSL checkpoint to start from")
     p.add_argument("--freeze", type=int, default=0, help="linear probe only")
+    p.add_argument("--steps-per-epoch", type=int, default=0,
+                   help="fix the optimizer budget instead of letting it scale "
+                        "with the label count -- required for label-fraction "
+                        "comparisons, where otherwise 1%% of labels also means "
+                        "1%% of the gradient steps")
     args = p.parse_args()
 
     out = Path(args.out)
@@ -167,7 +172,7 @@ def main():
 
     params = [prm for prm in model.parameters() if prm.requires_grad]
     opt = torch.optim.AdamW(params, lr=args.lr, weight_decay=args.wd)
-    steps = max(1, len(Xg) // args.batch)
+    steps = args.steps_per_epoch or max(1, len(Xg) // args.batch)
     total = steps * args.epochs
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, args.lr, total_steps=total,
                                                 pct_start=0.1)
@@ -176,10 +181,13 @@ def main():
 
     for ep in range(args.epochs):
         model.train()
+        need = steps * args.batch
         if samp_w is not None:
-            perm = torch.multinomial(samp_w, steps * args.batch, replacement=True)
-        else:
-            perm = torch.randperm(len(Xg), device=dev)
+            perm = torch.multinomial(samp_w, need, replacement=True)
+        else:                       # repeat the shuffle if one pass is too short
+            reps = [torch.randperm(len(Xg), device=dev)
+                    for _ in range(max(1, -(-need // len(Xg))))]
+            perm = torch.cat(reps)[:need]
         tot = 0.0
         for i in range(steps):
             b = perm[i * args.batch:(i + 1) * args.batch]
