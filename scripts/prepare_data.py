@@ -85,7 +85,12 @@ def main():
     rep["lot_split_counts"] = {s: int(sum(v == s for v in assign.values()))
                                for s in ("train", "val", "test")}
     rep["wall_s"] = round(time.time() - t0, 1)
-    (out / "prepare.json").write_text(json.dumps(rep, indent=2))
+    text = json.dumps(rep, indent=2)
+    (out / "prepare.json").write_text(text)
+    # a second copy outside data/, which is gitignored: report.py needs these
+    # counts to render the README, and it must not require the 1.6 GB corpus
+    Path("runs").mkdir(exist_ok=True)
+    Path("runs/prepare.json").write_text(text)
     print(json.dumps(rep["labeled_split_by_class"], indent=2))
     print("wrote data/proc/prepare.json in", rep["wall_s"], "s")
 

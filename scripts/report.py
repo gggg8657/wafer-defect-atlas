@@ -46,7 +46,7 @@ def main():
          "from the synthetic version of this repo.", ""]
 
     # ---------------------------------------------------------- dataset ----
-    pr = jload("data/proc/prepare.json")
+    pr = jload(R / "prepare.json") or jload("data/proc/prepare.json")
     if pr:
         L += ["## Dataset and split", "",
               table([["source", "WM-811K (`LSWMD.pkl`), 811,457 real wafer maps"],
