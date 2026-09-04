@@ -1,0 +1,8 @@
+usage: train_cls.py [-h] [--out OUT] [--epochs EPOCHS] [--batch BATCH]
+                    [--lr LR] [--wd WD] [--width WIDTH] [--seed SEED]
+                    [--loss {bce,ce,focal}]
+                    [--posweight-power POSWEIGHT_POWER]
+                    [--sample-power SAMPLE_POWER] [--aug AUG]
+                    [--label-frac LABEL_FRAC] [--init INIT] [--freeze FREEZE]
+                    [--steps-per-epoch STEPS_PER_EPOCH]
+train_cls.py: error: argument --label-frac: expected one argument

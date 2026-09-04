@@ -91,21 +91,22 @@ def fig_f1(runs):
         return
     pc = best["test"]["multilabel_8"]["per_class"]
     order = sorted(DEFECT_CLASSES, key=lambda c: -pc[c]["support"])
-    fig, axes = plt.subplots(1, 2, figsize=(11, 3.8),
-                             gridspec_kw={"width_ratios": [1.15, 1]})
+    fig, axes = plt.subplots(1, 2, figsize=(11.6, 4.1),
+                             gridspec_kw={"width_ratios": [1.1, 1]})
     ax = axes[0]
     vals = [pc[c]["f1"] for c in order]
     ax.barh(np.arange(8), vals, height=0.62, color=SERIES[0], linewidth=0)
     ax.axvline(0.95, color=INK3, lw=1.2, ls=(0, (4, 3)))
-    ax.text(0.95, 8.0, " KPI 0.95", fontsize=8, color=INK3, va="bottom")
+    ax.set_ylim(8.0, -1.1)
+    ax.text(0.95, -1.05, " KPI 0.95", fontsize=8, color=INK3, va="top")
     ax.set_yticks(np.arange(8), [f"{c}  ({pc[c]['support']:,})" for c in order],
                   fontsize=8)
-    ax.invert_yaxis()
     for i, v in enumerate(vals):
-        ax.text(v + 0.012, i, f"{v:.3f}", va="center", fontsize=8, color=INK2)
-    ax.set_xlim(0, 1.14)
+        ax.text(v + 0.015, i, f"{v:.3f}", va="center", fontsize=8, color=INK2)
+    ax.set_xlim(0, 1.2)
     ax.set_xlabel("per-class F1 on held-out lots  (class, test support)")
-    ax.set_title("Per-class F1 falls with support", fontsize=9.5, loc="left", color=INK)
+    ax.set_title("Per-class F1 tracks ambiguity, not rarity", fontsize=9.5,
+                 loc="left", color=INK)
     clean(ax)
 
     ax = axes[1]
@@ -133,8 +134,11 @@ def fig_f1(runs):
     ax.set_xlabel("F1 on held-out lots")
     ax.set_title("Imbalance strategy, same budget and split", fontsize=9.5,
                  loc="left", color=INK)
-    ax.legend(fontsize=8, loc="lower right", labelcolor=INK2)
     clean(ax)
+    h, l = ax.get_legend_handles_labels()
+    fig.legend(h, l, fontsize=8, loc="upper center", bbox_to_anchor=(0.76, 0.02),
+               ncol=2, labelcolor=INK2, columnspacing=1.4)
+    fig.subplots_adjust(top=0.90, bottom=0.22, wspace=0.55)
     save(fig, A / "fig_f1.png")
 
 

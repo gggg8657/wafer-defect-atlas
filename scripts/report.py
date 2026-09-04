@@ -261,6 +261,10 @@ def render_readme(pr, best, gc, cl, lf, sweep_rows, best_tag, sel, ssl):
             V[f"best.f1_{c}"] = f(ml["per_class"][c]["f1"])
             V[f"best.n_{c}"] = f"{ml['per_class'][c]['support']:,}"
         V["best.f1_none"] = f(c9["per_class"]["none"]["f1"])
+        C = best["test"]["confusion"]
+        for i, c in enumerate(CLASSES_9):
+            if i:                      # how much of each class leaks into `none`
+                V[f"cm.{c}.none"] = f"{100 * C[i][0] / max(sum(C[i]), 1):.0f}%"
     if sel.get("seed_spread"):
         ss = sel["seed_spread"]
         V |= {"seed.n": str(ss["n_seeds"]),

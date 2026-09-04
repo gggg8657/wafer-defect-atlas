@@ -6,7 +6,7 @@
 set -e
 cd "$(dirname "$0")/.."
 PY=~/miniforge3/envs/pdeno/bin/python
-BASE="${BASE:---loss bce --sample-power 0.5}"
+BASE="${BASE:---loss bce}"
 SSL=runs/ssl/ssl.pt
 mkdir -p runs/labelfrac
 run () { CUDA_VISIBLE_DEVICES=$1 $PY scripts/train_cls.py --epochs 60 \
