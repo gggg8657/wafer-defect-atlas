@@ -182,46 +182,63 @@ def fig_gradcam(run="runs/cls_best"):
     te = np.flatnonzero(m["split"] == "test")
     y = m["y"][te]
 
-    fig = plt.figure(figsize=(12, 5.4))
-    gs = fig.add_gridspec(2, 8, height_ratios=[1.05, 1.0], hspace=0.30, wspace=0.10)
+    fig = plt.figure(figsize=(12.4, 5.6))
+    outer = fig.add_gridspec(2, 1, height_ratios=[1.0, 1.28], hspace=0.30,
+                             left=0.06, right=0.99, top=0.90, bottom=0.14)
+    top = outer[0].subgridspec(1, 8, wspace=0.08)
+    bot = outer[1].subgridspec(1, 2, wspace=0.26)
     for k, c in enumerate(DEFECT_CLASSES):
         sel = te[y == k + 1]
-        sel = sel[np.argsort(-m["dieSize"][te][y == k + 1])][:60]
-        pick = sel[len(sel) // 2]
-        x = torch.from_numpy(np.asarray(X[pick], dtype=np.float32) / 255)[None].to(dev)
-        cam = grad_cam(model, x, cls=torch.tensor([k if n_out == 8 else k + 1],
-                                                  device=dev))[0].cpu().numpy()
-        ax = fig.add_subplot(gs[0, k])
-        ax.imshow(wafer_rgb(x[0].cpu().numpy(), cam))
+        xb = torch.from_numpy(np.asarray(X[sel], dtype=np.float32) / 255).to(dev)
+        with torch.no_grad():
+            o = model(xb).float()
+            p = (o.softmax(1)[:, k + 1] if n_out == 9 else o.sigmoid()[:, k]).cpu().numpy()
+        # the median-confidence *correctly* classified wafer -- a typical
+        # success, not the best one in the split
+        good = np.flatnonzero(p > 0.5)
+        good = good if len(good) else np.argsort(-p)[:1]
+        pick = good[np.argsort(p[good])[len(good) // 2]]
+        x1 = xb[pick:pick + 1]
+        cam = grad_cam(model, x1, cls=torch.tensor([k if n_out == 8 else k + 1],
+                                                   device=dev))[0].cpu().numpy()
+        ax = fig.add_subplot(top[0, k])
+        ax.imshow(wafer_rgb(x1[0].cpu().numpy(), cam))
         ax.set_title(c, fontsize=8.5, color=INK, pad=3)
         ax.axis("off")
+    fig.text(0.06, 0.955, "Grad-CAM on real WM-811K test wafers "
+             "(median-confidence correct example per class)",
+             fontsize=10.5, color=INK, ha="left")
+
     lab = list(gc["per_class"])
-    ax = fig.add_subplot(gs[1, 0:4])
-    v = [gc["per_class"][c]["fail_die_lift"] for c in lab]
-    ax.bar(np.arange(len(lab)), v, width=0.62, color=SERIES[0], linewidth=0)
+    xx = np.arange(len(lab))
+    ax = fig.add_subplot(bot[0, 0])
+    v = [gc["per_class"][c]["top10_cam_fail_lift"] for c in lab]
     ax.axhline(1.0, color=INK3, lw=1.2, ls=(0, (4, 3)))
-    ax.text(len(lab) - 0.4, 1.02, "chance = 1.0", fontsize=8, color=INK3, ha="right")
-    for i, s in enumerate(v):
-        ax.text(i, s + 0.03, f"{s:.2f}", ha="center", fontsize=7.5, color=INK2)
-    ax.set_xticks(np.arange(len(lab)), lab, rotation=30, ha="right", fontsize=8)
-    ax.set_ylabel("CAM mass on failed dies / failed area")
-    ax.set_title("Grad-CAM heat sits on real failures", fontsize=9.5, loc="left",
-                 color=INK)
+    ax.vlines(xx, 1.0, v, color=GRID, lw=2)
+    ax.plot(xx, v, "o", color=SERIES[0], ms=8, markeredgecolor="none")
+    for i, s_ in enumerate(v):
+        ax.text(i, s_ + 0.03, f"{s_:.2f}", ha="center", fontsize=7.5, color=INK2)
+    ax.text(-0.5, 1.005, "chance = 1.0", fontsize=8, color=INK3, ha="left",
+            va="bottom")
+    ax.set_xticks(xx, lab, rotation=30, ha="right", fontsize=8)
+    ax.set_xlim(-0.6, len(lab) - 0.4)
+    ax.set_ylabel("fail density inside the top-10%\nCAM area / on the wafer")
+    ax.set_title("Where the heat is", fontsize=9.5, loc="left", color=INK)
     clean(ax, grid="y")
 
-    ax = fig.add_subplot(gs[1, 4:8])
+    ax = fig.add_subplot(bot[0, 1])
     dc = [gc["per_class"][c]["deletion_drop_cam"] for c in lab]
     dr = [gc["per_class"][c]["deletion_drop_random"] for c in lab]
-    xx = np.arange(len(lab))
     ax.bar(xx - 0.17, dc, width=0.32, color=SERIES[0], linewidth=0,
-           label="delete top-10% CAM area")
+           label="delete the top-10% CAM area")
     ax.bar(xx + 0.17, dr, width=0.32, color=SERIES[1], linewidth=0,
-           label="delete random 10%")
+           label="delete a random 10%")
     ax.set_xticks(xx, lab, rotation=30, ha="right", fontsize=8)
+    ax.set_xlim(-0.6, len(lab) - 0.4)
     ax.set_ylabel("drop in true-class probability")
-    ax.set_title("...and they are the evidence the model used", fontsize=9.5,
+    ax.set_title("Whether it is the evidence the model used", fontsize=9.5,
                  loc="left", color=INK)
-    ax.legend(fontsize=8, labelcolor=INK2)
+    ax.legend(fontsize=8, labelcolor=INK2, loc="upper center")
     clean(ax, grid="y")
     save(fig, A / "fig_gradcam.png")
 

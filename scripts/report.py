@@ -212,6 +212,123 @@ def main():
 
     Path("RESULTS.md").write_text("\n".join(L))
     print("wrote RESULTS.md", len("\n".join(L)), "chars")
+    render_readme(pr, best, gc, cl, lf, rows, best_tag, jload(R / "selection.json", {}),
+                  jload(R / "ssl/ssl.json", {}))
+
+
+def render_readme(pr, best, gc, cl, lf, sweep_rows, best_tag, sel, ssl):
+    """README.tmpl.md + the run JSONs -> README.md.
+
+    The README is a template with `{{key}}` holes; every hole is filled from a
+    JSON a run wrote, and an unfilled hole is a hard error.  That is the only
+    mechanism that keeps a number in the prose from drifting away from the
+    number in the table beside it.
+    """
+    tmpl = Path("README.tmpl.md")
+    if not tmpl.exists():
+        return
+    V = {}
+    if pr:
+        V |= {f"data.{k}": f"{pr[k]:,}" for k in
+              ("raw_rows", "n_labeled", "n_unlabeled", "n_lots",
+               "distinct_source_shapes")}
+        V |= {"data.coverage_ratio": f"{pr['labeled']['mean_coverage_over_pi_4']:.4f}",
+              "data.prep_s": f"{pr['wall_s']:.0f}",
+              "data.raw_shape_min": f"{pr['source_H'][0]}x{pr['source_W'][0]}",
+              "data.raw_shape_max": f"{pr['source_H'][2]}x{pr['source_W'][2]}",
+              "data.raw_shape_med": f"{pr['source_H'][1]}x{pr['source_W'][1]}"}
+        for s_ in ("train", "val", "test"):
+            V[f"data.lab_{s_}"] = f"{pr['labeled']['split_counts'][s_]:,}"
+            V[f"data.unlab_{s_}"] = f"{pr['unlabeled']['split_counts'][s_]:,}"
+            V[f"data.lots_{s_}"] = f"{pr['lot_split_counts'][s_]:,}"
+        for c in CLASSES_9:
+            V[f"data.n_{c}"] = f"{pr['class_counts'][c]:,}"
+    if best:
+        ml, c9 = best["test"]["multilabel_8"], best["test"]["class9"]
+        V |= {"best.macro_f1": f(ml["macro_f1"]), "best.micro_f1": f(ml["micro_f1"]),
+              "best.weighted_f1": f(ml["weighted_f1"]),
+              "best.macro_f1_9": f(c9["macro_f1"]),
+              "best.weighted_f1_9": f(c9["weighted_f1"]),
+              "best.acc_9": f(c9["accuracy"], 4),
+              "best.any_defect_f1": f(best["test"]["any_defect"]["f1"]),
+              "best.n_params": f"{best['n_params']:,}",
+              "best.wall_min": f"{best['wall_min']:.0f}",
+              "best.epochs": str(best["args"]["epochs"]),
+              "best.width": str(best["args"]["width"]),
+              "best.n_test": f"{best['test']['n']:,}",
+              "best.tag": best_tag or "-"}
+        for c in DEFECT_CLASSES:
+            V[f"best.f1_{c}"] = f(ml["per_class"][c]["f1"])
+            V[f"best.n_{c}"] = f"{ml['per_class'][c]['support']:,}"
+        V["best.f1_none"] = f(c9["per_class"]["none"]["f1"])
+    if sel.get("seed_spread"):
+        ss = sel["seed_spread"]
+        V |= {"seed.n": str(ss["n_seeds"]),
+              "seed.macro_mean": f(ss["test_macro_f1_mean"]),
+              "seed.macro_range": f(ss["test_macro_f1_range"]),
+              "seed.wtd_mean": f(ss["test_weighted_f1_9_mean"], 4),
+              "seed.wtd_range": f(ss["test_weighted_f1_9_range"], 4)}
+    if sweep_rows:
+        V["sweep.spread"] = f(max(float(r[3]) for r in sweep_rows) -
+                              min(float(r[3]) for r in sweep_rows))
+        noaug = [r for r in sweep_rows if "no augmentation" in r[0]]
+        if noaug:
+            V["sweep.noaug_macro"] = noaug[0][3]
+            V["sweep.noaug_gap"] = f(max(float(r[3]) for r in sweep_rows)
+                                     - float(noaug[0][3]))
+    if gc:
+        m_ = gc["mean"]
+        V |= {"cam.lift": f"{m_['top10_cam_fail_lift']:.2f}",
+              "cam.mass_lift": f"{m_['fail_die_lift']:.2f}",
+              "cam.peak": f"{m_['peak_on_failed_die']:.2f}",
+              "cam.peak_chance": f"{m_['peak_chance']:.2f}",
+              "cam.del": f(m_["deletion_drop_cam"]),
+              "cam.del_rand": f(m_["deletion_drop_random"]),
+              "cam.del_ratio": f"{m_['deletion_ratio']:.1f}",
+              "cam.centroid": f(m_["centroid_err_radii"], 2),
+              "cam.centroid_null": f(m_["centroid_err_null_radii"], 2),
+              "cam.rcorr": f"{m_['r_corr_over_classes']:+.2f}",
+              "cam.n": f"{sum(r['n'] for r in gc['per_class'].values()):,}"}
+        for c, r in gc["per_class"].items():
+            V[f"cam.lift_{c}"] = f"{r['top10_cam_fail_lift']:.2f}"
+            V[f"cam.del_{c}"] = f(r["deletion_drop_cam"])
+    if cl:
+        V |= {"clu.n_fit": f"{cl['n_fit']:,}",
+              "clu.n_pool": f"{cl['n_unlabeled_train_pool']:,}",
+              "clu.n_eval": f"{cl['n_eval_labeled_test']:,}",
+              "clu.majority": f(cl["majority_baseline"], 3)}
+        for enc in cl["encoders"]:
+            ks = sorted(cl["encoders"][enc]["k"], key=int)
+            bk = max(ks, key=lambda k: cl["encoders"][enc]["k"][k]["purity_defect_only"])
+            e = cl["encoders"][enc]["k"][bk]
+            V |= {f"clu.{enc}.best_k": bk,
+                  f"clu.{enc}.purity": f(e["purity"], 3),
+                  f"clu.{enc}.purity_defect": f(e["purity_defect_only"], 3),
+                  f"clu.{enc}.chance_defect": f(e["purity_defect_only_chance"], 3),
+                  f"clu.{enc}.nmi": f(e["nmi"], 3),
+                  f"clu.{enc}.nmi_defect": f(e["nmi_defect_only"], 3),
+                  f"clu.{enc}.purity_k9": f(cl["encoders"][enc]["k"]["9"]["purity"], 3),
+                  f"clu.{enc}.purity_defect_k9":
+                      f(cl["encoders"][enc]["k"]["9"]["purity_defect_only"], 3)}
+    if lf:
+        for m_ in lf:
+            for fr, v in lf[m_].items():
+                V[f"lf.{m_}.{fr}"] = f(v["test_macro_f1"])
+                V[f"lf.n.{fr}"] = f"{v['n_train_labels']:,}"
+    if ssl:
+        V |= {"ssl.n": f"{ssl.get('n_unlabeled_train', 0):,}",
+              "ssl.min": f"{ssl.get('wall_min', 0):.0f}",
+              "ssl.epochs": str(ssl.get("args", {}).get("epochs", "?"))}
+
+    text = tmpl.read_text()
+    for k, v in V.items():
+        text = text.replace("{{" + k + "}}", str(v))
+    import re
+    holes = sorted(set(re.findall(r"\{\{([^}]+)\}\}", text)))
+    if holes:
+        raise SystemExit("README.tmpl.md has unfilled holes: " + ", ".join(holes))
+    Path("README.md").write_text(text)
+    print("wrote README.md from README.tmpl.md", len(V), "values substituted")
 
 
 if __name__ == "__main__":

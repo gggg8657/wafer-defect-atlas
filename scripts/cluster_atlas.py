@@ -19,6 +19,13 @@ restricted to the 8 failure signatures) is reported alongside.
 """
 from __future__ import annotations
 
+import os
+
+# MiniBatchKMeans dumps core on this 192-core host unless the BLAS pool is
+# capped, and the cap has to be in place before numpy loads its backend.
+for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+    os.environ.setdefault(_v, "32")
+
 import argparse
 import json
 import sys
@@ -41,6 +48,15 @@ def embed_all(model, X, idx, dev, bs=4096):
             out.append(model.embed(xb.float() / 255.0).float().cpu())
     z = torch.cat(out).numpy()
     return z / (np.linalg.norm(z, axis=1, keepdims=True) + 1e-8)
+
+
+def chance_purity(labels, clusters, k, rng, mask=None):
+    """Purity of the same clustering with the labels shuffled *inside the subset
+    being scored*.  Shuffling over the whole labeled set instead would hand the
+    defect-only column the 85% `none` majority as its chance level, which is not
+    the question that column asks."""
+    lab, cl = (labels, clusters) if mask is None else (labels[mask], clusters[mask])
+    return purity(lab[rng.permutation(len(lab))], cl, k)[0]
 
 
 def purity(labels, clusters, k, mask=None):
@@ -133,6 +149,8 @@ def main():
         np.concatenate(list(raw_chunks(Xu, sub))))
     zf = np.concatenate([pca.transform(c) for c in raw_chunks(Xu, fit_idx)])
     zt = np.concatenate([pca.transform(c) for c in raw_chunks(Xl, te)])
+    feats["pixel_pca"] = (zf / (np.linalg.norm(zf, axis=1, keepdims=True) + 1e-8),
+                          zt / (np.linalg.norm(zt, axis=1, keepdims=True) + 1e-8))
     print(f"pixel PCA in {time.time()-t:.0f}s", flush=True)
 
     defect = y > 0
@@ -144,10 +162,9 @@ def main():
             cl = km.predict(Zte)
             pur, rows = purity(y, cl, k)
             pur_d, rows_d = purity(y, cl, k, mask=defect)
-            # chance: same cluster-size distribution, labels shuffled
-            perm = rng.permutation(len(y))
-            pur_rand, _ = purity(y[perm], cl, k)
-            pur_rand_d, _ = purity(y[perm], cl, k, mask=defect)
+            pur_rand = chance_purity(y, cl, k, rng)
+            pur_rand_d = chance_purity(y, cl, k, rng, mask=defect)
+            fit_sizes = np.bincount(km.labels_, minlength=k)
             res["encoders"][name]["k"][str(k)] = {
                 "purity": pur, "purity_defect_only": pur_d,
                 "purity_chance": pur_rand, "purity_defect_only_chance": pur_rand_d,
@@ -155,8 +172,15 @@ def main():
                 "ari": float(adjusted_rand_score(y, cl)),
                 "nmi_defect_only": float(normalized_mutual_info_score(y[defect], cl[defect])),
                 "n_clusters_used": int(len(np.unique(cl))),
-                "clusters": rows if k <= 32 else rows[:32],
+                "clusters": [dict(r, n_unlabeled=int(fit_sizes[r["cluster"]]))
+                             for r in (rows if k <= 32 else rows[:32])],
                 "clusters_defect_only": rows_d if k <= 32 else rows_d[:32],
+                # clusters holding real unlabeled mass whose labeled probe is
+                # still all `none`: where an unknown pattern would show up
+                "n_clusters_none_dominated": int(sum(
+                    r["dominant"] == "none" for r in rows)),
+                "unlabeled_in_none_dominated": int(sum(
+                    fit_sizes[r["cluster"]] for r in rows if r["dominant"] == "none")),
             }
             print(name, k, "purity", round(pur, 4), "defect-only",
                   round(pur_d, 4), "nmi", round(res["encoders"][name]["k"][str(k)]["nmi"], 4),

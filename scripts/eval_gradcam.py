@@ -86,6 +86,21 @@ def main():
         ok = fw > 1e-6
         corr = float(np.corrcoef(r_cam[ok], r_fail[ok])[0, 1]) if ok.sum() > 3 else float("nan")
 
+        # sharper than mass-weighted lift: what is the fail density *inside*
+        # the top-10% CAM area, against the wafer's own fail density?
+        on = mask > 0.05
+        kk = np.maximum((a.topk * on.sum((1, 2))).astype(int), 1)
+        flatc = np.where(on, camm, -1).reshape(len(camm), -1)
+        ordc = np.argsort(-flatc, axis=1)
+        topsel = np.zeros_like(flatc, dtype=bool)
+        for i in range(len(flatc)):
+            topsel[i, ordc[i, :kk[i]]] = True
+        topsel = topsel.reshape(camm.shape)
+        dens_top = (fail * topsel).sum((1, 2)) / np.maximum(topsel.sum((1, 2)), 1)
+        dens_all = (fail * on).sum((1, 2)) / np.maximum(on.sum((1, 2)), 1)
+        top_lift = dens_top / np.maximum(dens_all, 1e-6)
+        peak = np.array([fail[i].flatten()[ordc[i, 0]] > 0.5 for i in range(len(fail))])
+
         cy_cam = (camm * yy).sum((1, 2)) / w
         cx_cam = (camm * xx).sum((1, 2)) / w
         cy_f = (fail * yy).sum((1, 2)) / fw
@@ -120,6 +135,9 @@ def main():
         res[cls] = {
             "n": int(len(xb)),
             "fail_die_lift": float(lift.mean()),
+            "top10_cam_fail_lift": float(top_lift.mean()),
+            "peak_on_failed_die": float(peak.mean()),
+            "peak_chance": float(dens_all.mean()),
             "cam_mass_on_fail": float(on_fail.mean()),
             "fail_area_fraction": float(chance.mean()),
             "r_cam": float(r_cam.mean()), "r_fail": float(r_fail.mean()),
@@ -137,8 +155,10 @@ def main():
         print(cls, json.dumps(res[cls]), flush=True)
 
     agg = {k: float(np.mean([res[c][k] for c in res]))
-           for k in ("fail_die_lift", "centroid_err_radii", "centroid_err_null_radii",
+           for k in ("fail_die_lift", "top10_cam_fail_lift", "peak_on_failed_die",
+                     "peak_chance", "centroid_err_radii", "centroid_err_null_radii",
                      "deletion_drop_cam", "deletion_drop_random")}
+    agg["deletion_ratio"] = agg["deletion_drop_cam"] / max(agg["deletion_drop_random"], 1e-9)
     agg["r_corr_over_classes"] = float(np.corrcoef(
         [res[c]["r_cam"] for c in res], [res[c]["r_fail"] for c in res])[0, 1])
     out = {"run": a.run, "topk": a.topk, "per_class": res, "mean": agg}

@@ -1,0 +1,54 @@
+{
+  "selected": "runs/final/seed2",
+  "selected_val_macro_f1": 0.9041585594168549,
+  "candidates": {
+    "runs/final/seed2": {
+      "val_macro_f1": 0.9041585594168549,
+      "test_macro_f1": 0.8967361231730758
+    },
+    "runs/cls_bce": {
+      "val_macro_f1": 0.9040400696551782,
+      "test_macro_f1": 0.887750362333539
+    },
+    "runs/final/seed1": {
+      "val_macro_f1": 0.9002933044204788,
+      "test_macro_f1": 0.8849956783812646
+    },
+    "runs/cls_posw": {
+      "val_macro_f1": 0.898595734021294,
+      "test_macro_f1": 0.8990510457193086
+    },
+    "runs/cls_focal": {
+      "val_macro_f1": 0.8983677624807593,
+      "test_macro_f1": 0.8943506923303173
+    },
+    "runs/final/seed0": {
+      "val_macro_f1": 0.8960440981900846,
+      "test_macro_f1": 0.893975117786897
+    },
+    "runs/cls_ce": {
+      "val_macro_f1": 0.8926249599201542,
+      "test_macro_f1": 0.8833706844400577
+    },
+    "runs/cls_bal": {
+      "val_macro_f1": 0.88860760430526,
+      "test_macro_f1": 0.8862668929557622
+    },
+    "runs/cls_bce_noaug": {
+      "val_macro_f1": 0.869959723759744,
+      "test_macro_f1": 0.8569307083232149
+    }
+  },
+  "seed_spread": {
+    "n_seeds": 3,
+    "test_macro_f1": [
+      0.8967361231730758,
+      0.8849956783812646,
+      0.893975117786897
+    ],
+    "test_macro_f1_mean": 0.8919023064470791,
+    "test_macro_f1_range": 0.011740444791811244,
+    "test_weighted_f1_9_mean": 0.9798257994168328,
+    "test_weighted_f1_9_range": 0.0014300657866291866
+  }
+}
