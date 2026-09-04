@@ -1,6 +1,6 @@
+# The real-data path: WM-811K (data/LSWMD.pkl, 1.6 GB, not redistributed here).
 torch>=2.0
 numpy>=1.24
 matplotlib>=3.7
-umap-learn>=0.5
-hdbscan>=0.8
-# WM-811K + MixedWM38 from Kaggle
+pandas>=2.0          # only to unpickle LSWMD.pkl -- it is a pandas DataFrame
+scikit-learn>=1.4    # MiniBatchKMeans, PCA, NMI/ARI for the clustering KPI

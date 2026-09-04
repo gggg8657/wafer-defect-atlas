@@ -281,7 +281,7 @@ def fig_cluster():
         clean(ax, grid="y")
 
     ax = axes[2]
-    enc = "simclr" if "simclr" in cl["encoders"] else names[0]
+    enc = names[0]   # the encoder that works; the curves already show which
     k = max(int(x) for x in cl["encoders"][enc]["k"] if int(x) <= 32)
     rows = cl["encoders"][enc]["k"][str(k)]["clusters_defect_only"]
     M = np.array([r["counts"][1:] for r in rows], dtype=float)

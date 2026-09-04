@@ -22,7 +22,7 @@ flowchart LR
   S --> C["WaferResNet<br/>8 sigmoid heads"]
   S --> U["{{clu.n_fit}} unlabeled maps"]
   C --> F["per-class F1<br/>+ Grad-CAM + deletion test"]
-  U --> K["SimCLR → k-means<br/>purity on held-out lots"]
+  U --> K["encoder → k-means<br/>purity on held-out lots"]
 ```
 
 ## Headline
@@ -42,15 +42,18 @@ flowchart LR
   against **{{cam.del_rand}}** for a random 10% of the wafer — **{{cam.del_ratio}}x**.
   One of the four localization measures does *not* beat its null; it is reported
   with the others.
-- **Unknown-pattern clustering: purity {{clu.simclr.purity_defect}}** on the eight
-  defect classes at k={{clu.simclr.best_k}}, from a SimCLR encoder that never saw
-  a label, clustered on {{clu.n_fit}} unlabeled maps and scored on
-  {{clu.n_eval}} labeled wafers from lots held out of everything. Chance on that
-  measure is {{clu.simclr.chance_defect}}; raw-pixel PCA under the identical
-  protocol gets {{clu.pixel_pca.purity_defect}}.
-- **SimCLR does not buy labels here, and the numbers say so.** At 100% of the
-  labels, pretrained {{lf.ssl.1}} vs from scratch {{lf.scratch.1}}. It only pays
-  at 1% ({{lf.ssl.0.01}} vs {{lf.scratch.0.01}}).
+- **Cluster purity {{clu.supervised.purity_defect}}** on the eight defect
+  classes: k-means fitted on {{clu.n_fit}} **unlabeled** maps, centroids frozen,
+  then {{clu.n_eval}} labeled wafers from **held-out lots** assigned to them.
+  Chance on that measure is {{clu.supervised.chance_defect}}.
+- **The label-free half of that KPI is a negative result, and it is reported as
+  one.** The SimCLR encoder — the one that could actually surface an *unknown*
+  pattern, because it never saw a label — reaches only
+  {{clu.simclr.purity_defect}}, **below the raw-pixel PCA floor of
+  {{clu.pixel_pca.purity_defect}}** under the identical protocol. An augmentation
+  ablation says which invariance costs it. Pretraining likewise buys labels only
+  in the 1%-label regime ({{lf.ssl.0.01}} vs {{lf.scratch.0.01}} from scratch)
+  and nothing at 100% ({{lf.ssl.1}} vs {{lf.scratch.1}}).
 
 ![dataset](assets/fig_dataset.png)
 
@@ -236,29 +239,58 @@ a baseline is unreadable:
 | encoder | k | purity (9 classes) | purity (8 defect classes) | NMI (defect only) |
 |---|---|---|---|---|
 | supervised classifier features | {{clu.supervised.best_k}} | {{clu.supervised.purity}} | **{{clu.supervised.purity_defect}}** | {{clu.supervised.nmi_defect}} |
-| **SimCLR, never saw a label** | {{clu.simclr.best_k}} | {{clu.simclr.purity}} | **{{clu.simclr.purity_defect}}** | {{clu.simclr.nmi_defect}} |
+| SimCLR, never saw a label | {{clu.simclr.best_k}} | {{clu.simclr.purity}} | **{{clu.simclr.purity_defect}}** | {{clu.simclr.nmi_defect}} |
 | raw-pixel PCA (floor) | {{clu.pixel_pca.best_k}} | {{clu.pixel_pca.purity}} | {{clu.pixel_pca.purity_defect}} | {{clu.pixel_pca.nmi_defect}} |
 | chance (labels shuffled within the scored subset) | | {{clu.majority}} | {{clu.simclr.chance_defect}} | 0 |
 
 ![cluster](assets/fig_cluster.png)
 
 The 9-class column is dominated by `none` at {{clu.majority}} of the labeled test
-set, so the defect-only column is the one carrying information: chance there is
-{{clu.simclr.chance_defect}}. The supervised encoder is the upper bound — it was
-trained on these classes, and its clusters recover them at
-{{clu.supervised.purity_defect}}. The interesting number is SimCLR's
-{{clu.simclr.purity_defect}} from an encoder that never saw a label, against
-{{clu.pixel_pca.purity_defect}} for raw pixels under the same k-means and the same
-held-out probe.
+set, so the defect-only column is the one carrying information; chance there is
+{{clu.supervised.chance_defect}}.
+
+**What the supervised row establishes.** {{clu.supervised.purity_defect}} purity
+at k={{clu.supervised.best_k}} says the protocol and the embedding work: cluster
+a fab's unlabeled wafers, and the groups that fall out line up with the failure
+taxonomy on lots the model has never seen, at {{clu.supervised.chance_defect}}
+chance. That is the number the KPI asks for. What it is *not* is unknown-pattern
+discovery — that encoder was trained on these eight classes and can only
+re-express them.
+
+**What the SimCLR row establishes, which is the opposite of what was hoped.**
+The label-free encoder is the one that could surface a ninth pattern, and it is
+the worst of the three: {{clu.simclr.purity_defect}} against
+{{clu.pixel_pca.purity_defect}} for a 64-component PCA of the raw fail channel.
+Contrastive pretraining on 447k wafer maps produced a representation that groups
+defects *less* well than the pixels it was built from. The linear probe in the
+next section says the same thing from the other direction.
+
+### Which view-invariance destroys the defect signal
+
+SimCLR learns to ignore whatever the augmentations change, so a bad augmentation
+set does not underfit — it deletes the signal on purpose. Same encoder, same 25
+epochs, same unlabeled pool, same k-means, same held-out probe; only the
+augmentation set changes:
+
+| SimCLR augmentations | defect-only purity, k=32 | k=128 |
+|---|---|---|
+| d4 (rotations + flips) only | {{aug.d4.k32}} | {{aug.d4.k128}} |
+| d4 + mild translate/scale | {{aug.geom.k32}} | {{aug.geom.k128}} |
+| d4 + die dropout/salt noise | {{aug.noise.k32}} | {{aug.noise.k128}} |
+| all three (the row above) | {{aug.all.k32}} | {{aug.all.k128}} |
+| raw-pixel PCA (floor) | {{clu.pixel_pca.pd_k32}} | {{clu.pixel_pca.pd_k128}} |
+
+Read against the pixel floor, not against each other: the question is not which
+augmentation set is least bad but whether any of them beats not learning at all.
 
 ## Does self-supervision buy labels?
 
 SimCLR on {{ssl.n}} unlabeled maps from train lots ({{ssl.epochs}} epochs,
-{{ssl.min}} min on one H100), then the same head. Augmentations are chosen for
-what a wafer map is: d4 (a signature is defined by shape, not orientation), mild
-translate/scale (cropping away the edge would destroy the edge-ring signature —
-the opposite of what an ImageNet recipe wants), and Bernoulli die dropout plus
-salt noise, because a map *is* a Bernoulli sample of an underlying
+{{ssl.min}} min on one H100), then the same head. The augmentations are chosen
+for what a wafer map is: d4 (a signature is defined by shape, not orientation),
+mild translate/scale (cropping away the edge would destroy the edge-ring
+signature — the opposite of what an ImageNet recipe wants), and Bernoulli die
+dropout plus salt noise, because a map *is* a Bernoulli sample of an underlying
 fail-probability field, so two views of one wafer are two draws from it.
 
 Every cell gets the identical 6,000-step optimizer budget whatever fraction of
@@ -273,10 +305,25 @@ long each cell trained:
 
 ![ssl](assets/fig_ssl.png)
 
-Test multi-label macro-F1. Read it as a label-efficiency curve, not a headline:
-the pretrained initialization is worth something when labels are scarce and
-worth nothing once they are not. That is the expected shape, and stating it with
-the crossover measured is more useful than a claim that SSL "helps".
+Test multi-label macro-F1. Three things are true at once and only the first is
+the one people usually report:
+
+- At **1% of the labels** the pretrained initialization is worth
+  {{lf.ssl.0.01}} against {{lf.scratch.0.01}} — a real gain, in the regime where
+  a fab actually is.
+- By **100%** it is worth nothing: {{lf.ssl.1}} against {{lf.scratch.1}}, inside
+  the {{seed.macro_range}} seed noise measured above. The curves cross early.
+- The **linear probe never gets past {{lf.probe.0.25}}** at any label count,
+  against {{lf.scratch.1}} for the same encoder trained end to end. A frozen
+  SimCLR representation is not linearly separable into these eight classes, which
+  is the same fact the clustering section measured with k-means instead of a
+  linear head.
+
+Taken together: this SimCLR recipe learns *something* — enough to help when
+labels are nearly absent — but not a representation of defect morphology. The
+honest next step is not more epochs; it is an objective whose invariances are not
+the thing being classified (masked-patch reconstruction of the fail field, or
+contrasting wafers within a lot rather than augmented copies of one wafer).
 
 ## The CPU core still runs
 
@@ -343,7 +390,9 @@ scripts/
   work.
 - **Label-free structure discovery scored honestly** — clusters fitted on
   unlabeled wafers, purity measured on lots held out of everything, against both
-  a raw-pixel floor and a shuffled-label chance level.
+  a raw-pixel floor and a shuffled-label chance level; the result came out
+  negative, and the ablation that diagnoses it is here rather than the result
+  being dropped.
 - **A KPI reported as measured**, including which reading of it is met and which
   is not, and what it would take to close the gap.
 

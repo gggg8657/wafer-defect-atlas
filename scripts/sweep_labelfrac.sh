@@ -10,7 +10,7 @@ BASE="${BASE:---loss bce}"
 SSL=runs/ssl/ssl.pt
 mkdir -p runs/labelfrac
 run () { CUDA_VISIBLE_DEVICES=$1 $PY scripts/train_cls.py --epochs 60 \
-         --steps-per-epoch 100 $BASE --label-frac $2 --out runs/labelfrac/$3 ${@:4} \
+         --steps-per-epoch 100 --width 64 $BASE --label-frac $2 --out runs/labelfrac/$3 ${@:4} \
          > runs/labelfrac/$3.log 2>&1 & }
 for f in 0.01 0.05 0.25 1.0; do
   t=$(echo $f | tr -d '.')

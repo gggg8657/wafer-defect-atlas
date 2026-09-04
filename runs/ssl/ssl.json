@@ -1,0 +1,14 @@
+{
+  "args": {
+    "out": "runs/ssl",
+    "epochs": 25,
+    "batch": 1024,
+    "lr": 0.002,
+    "width": 64,
+    "tau": 0.2,
+    "seed": 0
+  },
+  "n_unlabeled_train": 447573,
+  "final_nt_xent": 3.0095774740048897,
+  "wall_min": 20.740105573336283
+}

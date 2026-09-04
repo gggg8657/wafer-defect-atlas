@@ -98,6 +98,9 @@ def main():
     p.add_argument("--fit-n", type=int, default=500000,
                    help="unlabeled maps used to fit k-means")
     p.add_argument("--out", default="runs/cluster.json")
+    p.add_argument("--extra", nargs="*", default=[],
+                   help="name=path.pt encoders to score under the same protocol")
+    p.add_argument("--no-pixel", action="store_true")
     p.add_argument("--seed", type=int, default=0)
     a = p.parse_args()
     from sklearn.cluster import MiniBatchKMeans
@@ -118,9 +121,14 @@ def main():
     te = np.flatnonzero(ml["split"] == "test")
     y = ml["y"][te].astype(int)
 
-    encoders = {"supervised": ("supervised", a.cls_run)}
+    encoders = {}
+    if Path(a.cls_run).exists():
+        encoders["supervised"] = ("supervised", a.cls_run)
     if Path(a.ssl).exists():
         encoders["simclr"] = ("ssl", a.ssl)
+    for spec in a.extra:
+        nm, pth = spec.split("=", 1)
+        encoders[nm] = ("ssl", pth)
 
     res = {"n_unlabeled_train_pool": int(n_pool), "n_fit": int(len(fit_idx)),
            "n_eval_labeled_test": int(len(te)),
@@ -138,19 +146,23 @@ def main():
 
     # raw-pixel floor: PCA on the fail channel, same downstream pipeline
     t = time.time()
+    if a.no_pixel:
+        zf = zt = None
 
     def raw_chunks(X, idx, bs=20000):
         for i in range(0, len(idx), bs):
             b = np.ascontiguousarray(X[idx[i:i + bs]])[:, 1]      # fail channel
             yield b.reshape(len(b), -1).astype(np.float32) / 255.0
 
-    sub = np.sort(rng.choice(fit_idx, min(40000, len(fit_idx)), replace=False))
-    pca = PCA(n_components=64, random_state=a.seed).fit(
-        np.concatenate(list(raw_chunks(Xu, sub))))
-    zf = np.concatenate([pca.transform(c) for c in raw_chunks(Xu, fit_idx)])
-    zt = np.concatenate([pca.transform(c) for c in raw_chunks(Xl, te)])
-    feats["pixel_pca"] = (zf / (np.linalg.norm(zf, axis=1, keepdims=True) + 1e-8),
-                          zt / (np.linalg.norm(zt, axis=1, keepdims=True) + 1e-8))
+    if not a.no_pixel:
+        sub = np.sort(rng.choice(fit_idx, min(40000, len(fit_idx)), replace=False))
+        pca = PCA(n_components=64, random_state=a.seed).fit(
+            np.concatenate(list(raw_chunks(Xu, sub))))
+        zf = np.concatenate([pca.transform(c) for c in raw_chunks(Xu, fit_idx)])
+        zt = np.concatenate([pca.transform(c) for c in raw_chunks(Xl, te)])
+    if not a.no_pixel:
+        feats["pixel_pca"] = (zf / (np.linalg.norm(zf, axis=1, keepdims=True) + 1e-8),
+                              zt / (np.linalg.norm(zt, axis=1, keepdims=True) + 1e-8))
     print(f"pixel PCA in {time.time()-t:.0f}s", flush=True)
 
     defect = y > 0

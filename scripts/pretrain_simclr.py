@@ -34,13 +34,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from wafermap.model import WaferResNet
 
 
-def augment(x, gen):
+def augment(x, gen, kinds=("d4", "affine", "noise")):
     b = x.shape[0]
-    g = torch.randint(8, (1,), generator=gen, device=x.device).item()
-    if g & 4:
-        x = torch.flip(x, [-1])
-    if g & 3:
-        x = torch.rot90(x, g & 3, (-2, -1))
+    if "d4" in kinds:
+        g = torch.randint(8, (1,), generator=gen, device=x.device).item()
+        if g & 4:
+            x = torch.flip(x, [-1])
+        if g & 3:
+            x = torch.rot90(x, g & 3, (-2, -1))
+    if "affine" not in kinds and "noise" not in kinds:
+        return x
     # mild translate/scale via an affine grid (keeps the wafer disc in frame)
     s = 1.0 + 0.15 * (torch.rand(b, 1, 1, device=x.device, generator=gen) - 0.5)
     t = 0.10 * (torch.rand(b, 2, 1, device=x.device, generator=gen) - 0.5)
@@ -48,8 +51,11 @@ def augment(x, gen):
     theta[:, 0, 0] = s[:, 0, 0]
     theta[:, 1, 1] = s[:, 0, 0]
     theta[:, :, 2] = t[:, :, 0]
-    grid = F.affine_grid(theta, x.shape, align_corners=False)
-    x = F.grid_sample(x, grid, align_corners=False, padding_mode="zeros")
+    if "affine" in kinds:
+        grid = F.affine_grid(theta, x.shape, align_corners=False)
+        x = F.grid_sample(x, grid, align_corners=False, padding_mode="zeros")
+    if "noise" not in kinds:
+        return x
     # die-level Bernoulli resampling of the fail channel
     keep = (torch.rand(x.shape, device=x.device, generator=gen) > 0.15).float()
     salt = (torch.rand(x.shape, device=x.device, generator=gen) < 0.01).float()
@@ -86,7 +92,11 @@ def main():
     p.add_argument("--width", type=int, default=48)
     p.add_argument("--tau", type=float, default=0.2)
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--aug", default="d4,affine,noise",
+                   help="comma list from d4,affine,noise -- the ablation that "
+                        "asks which view-invariance destroys the defect signal")
     args = p.parse_args()
+    kinds = tuple(args.aug.split(","))
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -117,8 +127,8 @@ def main():
         for i in range(steps):
             xb = Xg[perm[i * args.batch:(i + 1) * args.batch]].float() / 255.0
             with torch.autocast("cuda", torch.bfloat16):
-                loss = nt_xent(model(augment(xb, gen)).float(),
-                               model(augment(xb, gen)).float(), args.tau)
+                loss = nt_xent(model(augment(xb, gen, kinds)).float(),
+                               model(augment(xb, gen, kinds)).float(), args.tau)
             opt.zero_grad(set_to_none=True)
             loss.backward()
             opt.step()

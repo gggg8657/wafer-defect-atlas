@@ -79,7 +79,7 @@ def main():
                     ["class", "total", "train", "val", "test"]), ""]
 
     # --------------------------------------------------- imbalance sweep ----
-    rows, best_tag, best_path, best_val = [], None, None, -1
+    rows, best_tag, best_path, best_val, sel = [], None, None, -1, {}
     for tag, path in SWEEP:
         e = jload(R / path / "eval.json")
         if not e:
@@ -100,7 +100,35 @@ def main():
               table(rows, ["strategy", "best epoch", "val macro-F1",
                            "test macro-F1", "test micro-F1", "test 9-class wtd-F1",
                            "test 9-class acc", "test Near-full F1"]),
-              "", f"Selected: **{best_tag}** (`runs/{best_path}`).", ""]
+              "", f"Winning strategy on val: **{best_tag}** (`runs/{best_path}`).", ""]
+
+    # --------------------------------------------- final model + seed noise ----
+    sel = jload(R / "selection.json", {})
+    if sel:
+        L += ["## Final model, and what a rerun costs", "",
+              "The val-winning strategy retrained on a longer schedule at a wider "
+              "encoder, three seeds, one per H100.  Three seeds because a 0.01 "
+              "difference between two strategies means nothing until you know what "
+              "rerunning the *same* one costs.  Everything below is selected on "
+              "val; `runs/cls_best` is the argmax of the val column.", "",
+              table([[n, f(v["val_macro_f1"]), f(v["test_macro_f1"])]
+                     for n, v in sel["candidates"].items()],
+                    ["run", "val macro-F1", "test macro-F1"]), ""]
+        if sel.get("seed_spread"):
+            ss = sel["seed_spread"]
+            L += [table([["seeds", ss["n_seeds"]],
+                         ["test macro-F1 per seed",
+                          ", ".join(f"{x:.4f}" for x in ss["test_macro_f1"])],
+                         ["mean", f(ss["test_macro_f1_mean"], 4)],
+                         ["range (max - min)", f(ss["test_macro_f1_range"], 4)],
+                         ["9-class weighted-F1 mean", f(ss["test_weighted_f1_9_mean"], 4)],
+                         ["9-class weighted-F1 range", f(ss["test_weighted_f1_9_range"], 4)]],
+                        ["", ""]),
+                  "", f"The seed range ({f(ss['test_macro_f1_range'], 4)}) is the "
+                  "same size as the spread across imbalance strategies above, which "
+                  "is why that sweep is reported as a null result rather than a "
+                  "ranking.", ""]
+        L += [f"Reported model: `{sel['selected']}`, mirrored to `runs/cls_best`.", ""]
 
     # ----------------------------------------------------- per-class F1 ----
     best = jload(R / "cls_best/eval.json") or (jload(R / f"{best_path}/eval.json")
@@ -189,6 +217,25 @@ def main():
                          "defect-only purity", "defect-only chance", "NMI",
                          "NMI (defect only)", "ARI"]), ""]
 
+    ca = jload(R / "cluster_aug.json")
+    if ca and cl:
+        nice = {"d4": "d4 only", "geom": "d4 + translate/scale",
+                "noise": "d4 + die dropout/salt noise"}
+        rows_a = [[nice.get(n, n)] +
+                  [f(ca["encoders"][n]["k"][k]["purity_defect_only"], 4)
+                   for k in ("32", "128")] for n in ca["encoders"]]
+        rows_a.append(["all three (the run above)"] +
+                      [f(cl["encoders"]["simclr"]["k"][k]["purity_defect_only"], 4)
+                       for k in ("32", "128")])
+        rows_a.append(["raw-pixel PCA (floor)"] +
+                      [f(cl["encoders"]["pixel_pca"]["k"][k]["purity_defect_only"], 4)
+                       for k in ("32", "128")])
+        L += ["### Which SimCLR view-invariance costs the defect signal", "",
+              "Same encoder, same 25 epochs, same unlabeled pool, same k-means and "
+              "the same held-out labeled probe -- only the augmentation set "
+              "changes.  Defect-only purity:", "",
+              table(rows_a, ["augmentations", "k=32", "k=128"]), ""]
+
     # -------------------------------------------------------------- SSL ----
     lf = jload(R / "labelfrac.json")
     if lf:
@@ -212,7 +259,7 @@ def main():
 
     Path("RESULTS.md").write_text("\n".join(L))
     print("wrote RESULTS.md", len("\n".join(L)), "chars")
-    render_readme(pr, best, gc, cl, lf, rows, best_tag, jload(R / "selection.json", {}),
+    render_readme(pr, best, gc, cl, lf, rows, best_tag, sel,
                   jload(R / "ssl/ssl.json", {}))
 
 
@@ -314,6 +361,21 @@ def render_readme(pr, best, gc, cl, lf, sweep_rows, best_tag, sel, ssl):
                   f"clu.{enc}.purity_k9": f(cl["encoders"][enc]["k"]["9"]["purity"], 3),
                   f"clu.{enc}.purity_defect_k9":
                       f(cl["encoders"][enc]["k"]["9"]["purity_defect_only"], 3)}
+            for kk in ("9", "16", "32", "64", "128"):
+                if kk in cl["encoders"][enc]["k"]:
+                    V[f"clu.{enc}.pd_k{kk}"] = f(
+                        cl["encoders"][enc]["k"][kk]["purity_defect_only"], 3)
+        for kk in ("32", "128"):
+            if "simclr" in cl["encoders"] and kk in cl["encoders"]["simclr"]["k"]:
+                V[f"aug.all.k{kk}"] = f(
+                    cl["encoders"]["simclr"]["k"][kk]["purity_defect_only"], 3)
+    ca = jload(R / "cluster_aug.json")
+    if ca:
+        for enc in ca["encoders"]:
+            for kk in ("32", "128"):
+                if kk in ca["encoders"][enc]["k"]:
+                    V[f"aug.{enc}.k{kk}"] = f(
+                        ca["encoders"][enc]["k"][kk]["purity_defect_only"], 3)
     if lf:
         for m_ in lf:
             for fr, v in lf[m_].items():
