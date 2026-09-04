@@ -324,7 +324,7 @@ the one people usually report:
 - By **100%** it is worth nothing: 0.882 against 0.889, inside
   the 0.012 seed noise measured above. The curves cross early.
 - The **linear probe never gets past 0.612** at any label count,
-  against 0.889 for the same encoder trained end to end. A frozen
+  against 0.882 for that same encoder unfrozen. A frozen
   SimCLR representation is not linearly separable into these eight classes, which
   is the same fact the clustering section measured with k-means instead of a
   linear head.
@@ -342,10 +342,17 @@ they are the ten-second path that shows the mechanism without a 1.6 GB download:
 
 ```bash
 pip install -r requirements.txt        # torch, numpy, matplotlib
-python demo_smoke.py                   # synthetic 4-class demo + gradcam.png
+python demo_smoke.py                   # synthetic 4-class demo -> gradcam.png
 PYTHONPATH=. python tests/test_smoke.py
 PYTHONPATH=. python tests/test_wm811k.py   # real-data path, CPU, no dataset needed
 ```
+
+![synthetic demo](gradcam.png)
+
+The synthetic maps are drawn with a defect region the demo *knows*, which is
+what lets it assert a Grad-CAM centre-of-mass error in pixels — the check the
+real data cannot support, and the reason the section above had to replace it
+with chance levels and a deletion test.
 
 `tests/test_wm811k.py` covers the three places this pipeline could quietly
 produce a wrong number: the area resize must preserve fail density, the lot
@@ -384,8 +391,10 @@ scripts/
   sweep_labelfrac.sh  SSL vs scratch vs linear probe at 1/5/25/100% labels
   eval_gradcam.py     the four localization measures + the deletion test
   cluster_atlas.py    k-means on unlabeled maps, purity on held-out labeled lots
+  collect_labelfrac.py  the 12 label-fraction cells -> one JSON
   make_figures.py     every figure above
   report.py           regenerates RESULTS.md *and this README* from the run JSONs
+README.tmpl.md        this file, with the numbers left as named holes for report.py
 ```
 
 ## What this demonstrates
